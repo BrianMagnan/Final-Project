@@ -1,36 +1,33 @@
 .error-display {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
-  padding: 40px 20px;
+  position: relative;
+  padding-top: 111px;
+  min-height: 100vh;
 }
 
 .error-display__container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  max-width: 500px;
   padding: 40px;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.error-display__icon {
-  font-size: 48px;
-  margin-bottom: 20px;
-  animation: bounce 2s infinite;
 }
 
 .error-display__title {
   font-size: 24px;
   font-weight: 600;
-  color: #ffffff;
+  color: #ff0000;
   margin: 0 0 15px 0;
 }
 

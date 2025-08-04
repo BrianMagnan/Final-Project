@@ -1,4 +1,6 @@
 import "./ErrorDisplay.css";
+import Footer from "../Footer/Footer";
+import { Link } from "react-router-dom";
 
 function ErrorDisplay({ error, onRetry, type }) {
   const getErrorMessage = () => {
@@ -27,18 +29,14 @@ function ErrorDisplay({ error, onRetry, type }) {
   return (
     <div className="error-display">
       <div className="error-display__container">
-        <h2 className="error-display__title">{getErrorTitle()}</h2>
-        <p className="error-display__message">{getErrorMessage()}</p>
-        {onRetry && (
-          <button
-            className="error-display__retry-btn"
-            onClick={onRetry}
-            aria-label="Retry"
-          >
-            Try Again
-          </button>
-        )}
+        <h1 className="error-display__title">{getErrorTitle()}</h1>
+        <h2 className="error-display__subtitle">{getErrorMessage()}</h2>
+
+        <Link to="/" className="error-display__link">
+          Go Back Home
+        </Link>
       </div>
+      <Footer className="error-display__footer" />
     </div>
   );
 }

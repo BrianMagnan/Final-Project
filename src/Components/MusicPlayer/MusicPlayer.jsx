@@ -26,11 +26,11 @@ const formatReleaseDate = (dateString) => {
     .padStart(2, "0")}.${year.toString().slice(-2)}`;
 };
 
-function MusicPlayer({ album, tracks, isOpen, onClose }) {
+function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const currentTrack = tracks[currentTrackIndex];
+  const currentTrack = tracks?.[currentTrackIndex];
 
   usePreventScroll(isOpen, "modal-open");
 
@@ -57,13 +57,46 @@ function MusicPlayer({ album, tracks, isOpen, onClose }) {
 
   if (!isOpen) return null;
 
+  // Show error state if there's an error
+  if (error) {
+    return (
+      <div
+        className="musicModal-overlay"
+        onClick={onClose}
+        style={{ "--album-art-url": `url(${album?.artwork})` }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Music player error"
+        onKeyDown={handleKeyDown}
+        tabIndex="-1"
+      >
+        <button
+          className="musicModal__close-btn"
+          onClick={onClose}
+          aria-label="Close music player"
+        >
+          X
+        </button>
+        <div className="musicModal" onClick={(e) => e.stopPropagation()}>
+          <div className="musicModal__error">
+            <h3 className="musicModal__error-title">Error</h3>
+            <p className="musicModal__error-message">{error}</p>
+            <button className="musicModal__error-retry" onClick={onClose}>
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Show loading state
   if (isLoading) {
     return (
       <div
         className="musicModal-overlay"
         onClick={onClose}
-        style={{ "--album-art-url": `url(${album.artwork})` }}
+        style={{ "--album-art-url": `url(${album?.artwork})` }}
         role="dialog"
         aria-modal="true"
         aria-label="Music player loading"

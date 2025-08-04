@@ -21,6 +21,7 @@ function Music() {
   const [albumTracks, setAlbumTracks] = useState([]);
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("Loading");
+  const [playerError, setPlayerError] = useState(null);
 
   useModalClose(isPlayerOpen, () => setIsPlayerOpen(false));
 
@@ -49,6 +50,7 @@ function Music() {
   // Optimized event handler with useCallback
   const handleAlbumClick = useCallback(async (album) => {
     try {
+      setPlayerError(null);
       setSelectedAlbum(album);
       setIsPlayerOpen(true);
 
@@ -57,6 +59,8 @@ function Music() {
       setAlbumTracks(tracks);
     } catch (error) {
       console.error("Error fetching album tracks:", error);
+      setPlayerError("Failed to load album tracks. Please try again.");
+      setIsPlayerOpen(false);
     }
   }, []);
 
@@ -66,9 +70,13 @@ function Music() {
       album: selectedAlbum,
       tracks: albumTracks,
       isOpen: isPlayerOpen,
-      onClose: () => setIsPlayerOpen(false),
+      onClose: () => {
+        setIsPlayerOpen(false);
+        setPlayerError(null);
+      },
+      error: playerError,
     }),
-    [selectedAlbum, albumTracks, isPlayerOpen]
+    [selectedAlbum, albumTracks, isPlayerOpen, playerError]
   );
 
   // Show loading state while loading

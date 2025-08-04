@@ -5,13 +5,11 @@ function Skeleton({ type = "default", count = 1, className = "" }) {
     switch (type) {
       case "album":
         return (
-          <div className="skeleton skeleton--album">
-            <div className="skeleton__image"></div>
-            <div className="skeleton__text">
-              <div className="skeleton__title"></div>
-              <div className="skeleton__subtitle"></div>
+          <article className="music__track">
+            <div className="music__artwork-container">
+              <div className="music__artwork skeleton"></div>
             </div>
-          </div>
+          </article>
         );
       case "text":
         return (
@@ -29,7 +27,8 @@ function Skeleton({ type = "default", count = 1, className = "" }) {
     }
   };
 
-  if (count > 1) {
+  // For non-album types, use the count prop
+  if (type !== "album") {
     return (
       <div className={`skeleton-container ${className}`}>
         {Array.from({ length: count }, (_, index) => (
@@ -41,6 +40,7 @@ function Skeleton({ type = "default", count = 1, className = "" }) {
     );
   }
 
+  // For album type, return single item (grid items are handled by parent)
   return (
     <div className={`skeleton-wrapper ${className}`}>{renderSkeleton()}</div>
   );

@@ -26,12 +26,14 @@ function LoadingState({
       case "music":
         return (
           <div className="loading-state__content">
-            <div className="loading-state__header">
-              <Skeleton type="text" />
-            </div>
-            <div className="loading-state__grid">
-              <Skeleton type="album" count={skeletonCount} />
-            </div>
+            <section
+              className="music__grid"
+              aria-label="Album collection skeleton"
+            >
+              {Array.from({ length: skeletonCount }, (_, index) => (
+                <Skeleton key={index} type="album" />
+              ))}
+            </section>
           </div>
         );
       case "main":

@@ -120,6 +120,48 @@
   height: 100%;
 }
 
+.musicModal__error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  gap: 20px;
+}
+
+.musicModal__error-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6b6b;
+  margin: 0;
+}
+
+.musicModal__error-message {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+.musicModal__error-retry {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.musicModal__error-retry:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
 .musicModal__artwork {
   min-width: 100%;
   height: auto;

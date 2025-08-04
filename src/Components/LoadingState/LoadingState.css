@@ -23,12 +23,6 @@
   padding: 0 20px;
 }
 
-.loading-state__grid {
-  display: grid;
-  gap: 20px;
-  padding: 0 20px;
-}
-
 .loading-state__hero {
   display: flex;
   flex-direction: column;
@@ -47,12 +41,6 @@
   margin: 0 auto;
 }
 
-/* Music loading state specific styles */
-.loading-state--skeleton .loading-state__grid {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 30px;
-}
-
 /* Main loading state specific styles */
 .loading-state--skeleton .loading-state__hero {
   text-align: center;
@@ -60,17 +48,25 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .loading-state__grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-  }
-
   .loading-state__hero {
     padding: 20px;
   }
 
   .loading-state__section {
     padding: 15px;
+  }
+}
+
+@media (max-width: 625px) {
+  .loading-state--skeleton .loading-state__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 50px;
+    padding: 40px 0;
+    place-items: center;
   }
 }
 

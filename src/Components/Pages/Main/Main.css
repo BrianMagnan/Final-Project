@@ -1,0 +1,193 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding-top: 111px;
+  overflow: hidden;
+}
+
+.main__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.main__title {
+  font-size: clamp(32px, 6vw, 80px);
+  font-weight: 600;
+  color: #ffffff80;
+  text-align: center;
+  margin: 20px 0 0px 0;
+  text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
+
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}
+
+.main__most-recent-album-title {
+  font-size: clamp(24px, 4vw, 50px);
+  font-weight: 600;
+  color: #ffffff80;
+  text-align: center;
+  margin: 10px 0 10px 0;
+  text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
+  opacity: 0.7;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.main__most-recent-album-release-date {
+  font-size: clamp(16px, 2.5vw, 24px);
+  font-weight: 400;
+  color: #ffffff80;
+  text-align: center;
+  margin: 0 0 10px 0;
+  text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
+  opacity: 0.7;
+  animation: fadeInUp 1s ease-out 0.7s both;
+}
+
+.main--loading {
+  position: relative;
+  min-height: 100vh;
+}
+
+.main__loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.main__most-recent-album {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 60px 0 0 0;
+}
+
+.main__most-recent-album__artwork {
+  width: clamp(200px, 25vw, 350px);
+  height: clamp(200px, 25vw, 350px);
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0.7;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.main__most-recent-album__artwork:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.4);
+  opacity: 1;
+}
+
+.main__empty-message {
+  font-size: clamp(16px, 3vw, 20px);
+  color: #666;
+  text-align: center;
+  opacity: 0.8;
+  margin: 40px 0;
+  padding: 20px;
+  background-color: rgba(102, 102, 102, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(102, 102, 102, 0.3);
+  text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.main__listen-button {
+  background: linear-gradient(135deg, #8c8c8c75, #4d4d4db5);
+  color: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 10px 0 0 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+  animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+.main__listen-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #8c8c8c, #4d4d4d);
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.663);
+  cursor: pointer;
+}
+
+.main__social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 2px 0;
+  margin-top: auto;
+}
+
+/* Responsive Styles -------------------------------------------------------------*/
+
+@media (max-width: 768px) {
+  .main__content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .main__title {
+    font-size: clamp(60px, 12vw, 120px);
+    padding: 20px 0;
+  }
+
+  .main__most-recent-album-title {
+    font-size: clamp(20px, 5vw, 32px);
+    margin: 15px 0 10px 0;
+  }
+
+  .main__most-recent-album-release-date {
+    font-size: clamp(14px, 3vw, 20px);
+    margin: 0 0 15px 0;
+  }
+
+  .main__most-recent-album {
+    margin: 30px 0;
+  }
+
+  .main__most-recent-album__artwork {
+    width: clamp(200px, 50vw, 300px);
+    height: clamp(200px, 50vw, 300px);
+  }
+
+  .main__listen-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+}

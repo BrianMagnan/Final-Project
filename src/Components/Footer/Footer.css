@@ -1,0 +1,31 @@
+.footer {
+  padding: 20px 0;
+  position: relative;
+  opacity: 1;
+  background-color: transparent;
+}
+
+.footer.main__footer {
+  margin-top: 20vh;
+}
+
+.footer.music__footer {
+  margin-top: 0;
+  /* background-color: #ff74ea2e; */
+}
+
+.footer__container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+}
+
+/* RESPONSIVE STYLES------------------------------- */
+
+@media screen and (max-width: 750px) {
+  .footer__container {
+    padding: 0 16px;
+  }
+}

@@ -1,0 +1,94 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  padding-top: 111px;
+  min-height: 100vh;
+}
+
+.not-found__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.not-found__error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.not-found__error-code {
+  font-size: 120px;
+  font-weight: 700;
+  color: #d32f2f;
+  margin: 0;
+}
+
+.not-found__error-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 10px 0;
+}
+
+.not-found__error-message {
+  font-size: 18px;
+  color: #666;
+  margin: 20px 0 30px 0;
+  line-height: 1.5;
+}
+
+.not-found__home-button {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.not-found__home-button:hover {
+  background: #f44336;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .not-found__content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .not-found__error-container {
+    padding: 30px 20px;
+  }
+
+  .not-found__error-code {
+    font-size: 80px;
+  }
+
+  .not-found__error-title {
+    font-size: 24px;
+  }
+
+  .not-found__error-message {
+    font-size: 16px;
+  }
+
+  .not-found__home-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

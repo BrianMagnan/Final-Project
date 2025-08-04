@@ -1,0 +1,23 @@
+.navBar__list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 20px;
+  text-decoration: none;
+}
+
+.navBar__link {
+  color: #ffffff80;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navBar__link:hover {
+  color: #ffffff;
+}
+
+.navBar__link--active {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}

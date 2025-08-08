@@ -1,0 +1,117 @@
+.music {
+  height: 100%;
+  width: 100vw;
+  padding-top: 111px;
+  overflow: hidden;
+}
+
+.music__grid {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 120px;
+  padding: 100px 50px;
+  place-items: center;
+}
+
+.music__track {
+  width: 250px;
+}
+
+.music__artwork {
+  width: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  opacity: 0.5;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.5);
+}
+
+.music__artwork:hover {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.663);
+  cursor: pointer;
+}
+
+/* Preloader and State Styles */
+.music--loading {
+  position: relative;
+  min-height: 100vh;
+}
+
+.music__loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.music__error-message {
+  font-size: clamp(16px, 3vw, 20px);
+  color: #d32f2f;
+  text-align: center;
+  opacity: 0.9;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: rgba(211, 47, 47, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(211, 47, 47, 0.3);
+  text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
+  animation: fadeInUp 1s ease-out 0.5s both;
+  max-width: 600px;
+}
+
+.music__empty-message {
+  font-size: clamp(16px, 3vw, 20px);
+  color: #666;
+  text-align: center;
+  opacity: 0.8;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: rgba(102, 102, 102, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(102, 102, 102, 0.3);
+  text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
+  animation: fadeInUp 1s ease-out 0.5s both;
+  max-width: 600px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* RESPONSIVE STYLES------------------------------- */
+
+@media (max-width: 780px) {
+  .music__grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 100px;
+    padding: 50px;
+  }
+}
+@media (max-width: 625px) {
+  .music__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 50px;
+    padding: 40px 0 40px 0;
+    place-items: center;
+  }
+}

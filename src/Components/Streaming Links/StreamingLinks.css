@@ -1,0 +1,93 @@
+.streaming {
+  margin: 2rem 0;
+}
+
+.streaming__container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  /* flex-wrap: wrap; */
+  height: 50px;
+  position: sticky;
+  padding: 0;
+}
+
+.streaming__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 1px black);
+}
+
+.streaming__link:hover {
+  transform: translateY(-3px);
+}
+
+.streaming__link svg {
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+}
+.streaming__link--apple.music {
+  height: 4rem;
+  width: 4rem;
+  padding: 0;
+  background-color: transparent;
+}
+
+.streaming__link--youtube.music {
+  height: 4rem;
+  width: 4rem;
+  padding: 0;
+  background-color: transparent;
+}
+
+.streaming__link--amazon.music {
+  height: 4rem;
+  width: 4rem;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* Tooltip */
+.streaming__tooltip {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.75rem;
+  background-color: #1f2937;
+  color: white;
+  font-size: 0.875rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* RESPONSIVE STYLES------------------------------- */
+
+@media (max-width: 768px) {
+  .streaming__container {
+    gap: 1rem;
+  }
+
+  .streaming__link {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .streaming__link svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}

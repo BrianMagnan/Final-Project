@@ -1,0 +1,78 @@
+.menu-toggle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 10px;
+  color: #ffffff80;
+  opacity: 0.5;
+}
+
+.menu-toggle__button {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid #ffffff;
+  gap: 5px;
+  cursor: pointer;
+  visibility: hidden;
+  background: transparent;
+  transition: all 0.3s ease;
+  width: 30px;
+  height: 30px;
+  color: #ffffff;
+}
+
+.menu-toggle__button span {
+  display: block;
+  color: #ffffff;
+  width: 20px;
+  height: 2px;
+  background: #ffffff;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-radius: 10px;
+  opacity: 0;
+  transform: scale(0.8) rotate(-90deg);
+  animation: hamburgerAppear 0.3s ease forwards;
+}
+
+@keyframes hamburgerAppear {
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.menu-toggle__close-button {
+  width: 20px;
+  height: 20px;
+  display: block;
+  opacity: 0;
+  transform: scale(0.8) rotate(90deg);
+  animation: closeButtonAppear 0.3s ease forwards;
+}
+
+@keyframes closeButtonAppear {
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.menu-toggle__button.open span {
+  display: none;
+}
+
+@media screen and (max-width: 625px) {
+  .menu-toggle__button {
+    display: flex;
+    visibility: visible;
+    color: #ffffff;
+  }
+  .menu-toggle__button:hover {
+    color: #ffffff;
+    opacity: 1;
+  }
+}

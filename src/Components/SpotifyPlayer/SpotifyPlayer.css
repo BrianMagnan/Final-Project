@@ -1,0 +1,53 @@
+.SpotifyPlayer {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* visibility: hidden; */
+}
+
+.SpotifyPlayer__embed {
+  min-width: 100%;
+  height: 500px;
+  border-radius: 20px;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 0;
+  padding-bottom: -20px;
+}
+
+.SpotifyPlayer__embed__small {
+  min-width: 100%;
+  height: 152px;
+  border-radius: 20px;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 0;
+}
+
+.SpotifyPlayer__embed__medium {
+  min-width: 100%;
+  height: 232px;
+  border-radius: 20px;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 0;
+}
+
+.SpotifyPlayer__embed__main {
+  height: 500px;
+  width: 1000px;
+  max-width: 90%;
+  border-radius: 20px;
+  border: none;
+  padding: 0;
+  position: relative;
+  top: 200px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* @media (max-width: 1024px) {
+  .SpotifyPlayer__embed__main {
+    width: 90%;
+  }
+} */

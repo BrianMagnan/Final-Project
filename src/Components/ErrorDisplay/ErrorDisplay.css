@@ -1,0 +1,101 @@
+.error-display {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  padding-top: 111px;
+  min-height: 100vh;
+}
+
+.error-display__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.error-display__title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ff0000;
+  margin: 0 0 15px 0;
+}
+
+.error-display__message {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0 0 25px 0;
+}
+
+.error-display__retry-button {
+  background: #d32f2f;
+
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+}
+
+.error-display__retry-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+
+  background: #f44336;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .error-display__container {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+
+  .error-display__icon {
+    font-size: 36px;
+  }
+
+  .error-display__title {
+    font-size: 20px;
+  }
+
+  .error-display__message {
+    font-size: 14px;
+  }
+
+  .error-display__retry-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

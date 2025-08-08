@@ -1,0 +1,105 @@
+/* Skeleton base styles */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-wrapper {
+  display: inline-block;
+}
+
+.skeleton-container {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+}
+
+.skeleton-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Apply skeleton styling to music page classes */
+.music__artwork.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  opacity: 0.5;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.3);
+  /* Override img-specific styles for skeleton div */
+  object-fit: unset;
+  cursor: unset;
+  transition: unset;
+  transform: unset;
+}
+
+/* Ensure skeleton artwork has proper dimensions */
+.music__artwork.skeleton {
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+  display: block;
+}
+
+/* Text skeleton */
+.skeleton--text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.skeleton__line {
+  height: 16px;
+  width: 100%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton__line--short {
+  width: 70%;
+}
+
+/* Circle skeleton */
+.skeleton--circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Rectangle skeleton */
+.skeleton--rectangle {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* Default skeleton */
+.skeleton--default {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

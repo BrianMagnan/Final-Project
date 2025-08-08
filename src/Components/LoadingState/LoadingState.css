@@ -1,0 +1,91 @@
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50vh;
+  padding: 20px;
+}
+
+.loading-state--skeleton {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.loading-state__content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-state__header {
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.loading-state__hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  padding: 40px 20px;
+}
+
+.loading-state__section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Main loading state specific styles */
+.loading-state--skeleton .loading-state__hero {
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .loading-state__hero {
+    padding: 20px;
+  }
+
+  .loading-state__section {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 625px) {
+  .loading-state--skeleton .loading-state__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    gap: 50px;
+    padding: 40px 0;
+    place-items: center;
+  }
+}
+
+/* Smooth transitions */
+.loading-state {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.loading-state--skeleton {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

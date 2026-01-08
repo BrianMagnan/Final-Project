@@ -1,7 +1,9 @@
-import { getArtistAlbums } from "./spotifyApi";
+// Transform raw album data from Spotify API to our app format
+export function transformedAlbums(albums) {
+  if (!albums || !Array.isArray(albums)) {
+    return [];
+  }
 
-async function transformedAlbums() {
-  const albums = await getArtistAlbums();
   return albums
     .map((album) => ({
       id: album.id,
@@ -20,5 +22,3 @@ async function transformedAlbums() {
       return dateB - dateA;
     });
 }
-
-export { transformedAlbums };

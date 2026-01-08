@@ -1,0 +1,157 @@
+/* CSS Custom Properties (Variables) */
+/* These can be imported into components to use the constants */
+
+:root {
+  /* Footer Margins */
+  --footer-main-margin: 25vh;
+  --footer-music-margin: 0;
+
+  /* Footer Spacing */
+  --footer-padding: 20px;
+  --footer-container-padding: 40px;
+  --footer-container-padding-mobile: 16px;
+
+  /* Header Height */
+  --header-height: 120px;
+
+  /* Header Spacing */
+  --header-margin: 5px;
+  --header-margin-bottom: 10px;
+  --header-font-size: 1.5rem;
+  --header-gap: 20px;
+  --header-mobile-padding: 20px;
+  --header-mobile-height: 70px;
+  --header-mobile-margin: 2px;
+  --header-mobile-margin-bottom: 5px;
+  --header-mobile-font-size: 1.2rem;
+  --header-mobile-gap: 12px;
+
+  /* Main Page Spacing */
+  --main-title-margin: 30px;
+  --main-subtitle-margin: 10px;
+  --main-release-date-margin: 10px;
+  --main-album-margin: 60px;
+  --main-artwork-border-radius: 12px;
+  --main-empty-message-margin: 40px;
+  --main-empty-message-padding: 20px;
+  --main-empty-message-border-radius: 8px;
+  --main-button-font-size: 16px;
+  --main-button-margin: 10px;
+  --main-mobile-padding: 20px;
+  --main-title-mobile-padding: 20px;
+  --main-subtitle-mobile-margin: 15px;
+  --main-release-date-mobile-margin: 15px;
+  --main-album-mobile-margin: 30px;
+  --main-button-mobile-padding: 10px 20px;
+  --main-button-mobile-font-size: 14px;
+  --main-button-mobile-margin-top: 15px;
+
+  /* Music Player Spacing */
+  --music-modal-overlay-padding: 10px;
+  --music-modal-backdrop-blur: 35px;
+  --music-modal-gap: 20px;
+  --music-modal-backdrop-filter: 30px;
+  --music-modal-album-info-margin: 20px;
+  --music-modal-album-info-width: 35%;
+  --music-modal-content-width: 65%;
+  --music-modal-content-margin: 20px;
+  --music-modal-close-btn-right: 20px;
+  --music-modal-close-btn-top: 10px;
+  --music-modal-close-btn-margin-top: 10px;
+  --music-modal-close-btn-padding: 10px 20px;
+  --music-modal-close-btn-font-size: 14px;
+  --music-modal-error-title-font-size: 24px;
+  --music-modal-error-message-font-size: 16px;
+  --music-modal-error-message-max-width: 300px;
+  --music-modal-error-retry-border-radius: 8px;
+  --music-modal-error-retry-font-size: 14px;
+  --music-modal-spotify-btn-padding: 10px 20px;
+  --music-modal-spotify-btn-font-size: 14px;
+  --music-modal-spotify-btn-margin-top: 10px;
+  --music-modal-title-text-font-size: 70px;
+  --music-modal-release-date-font-size: 20px;
+  --music-modal-release-date-padding-bottom: 10px;
+  --music-modal-embed-container-margin: 20px;
+  --music-modal-track-list-gap: 10px;
+  --music-modal-track-list-margin-top: 20px;
+  --music-modal-track-list-padding: 20px 0;
+  --music-modal-track-list-scrollbar-width: 6px;
+  --music-modal-track-list-scrollbar-thumb-border-radius: 3px;
+  --music-modal-track-margin-left: 20px;
+  --music-modal-track-duration-width: 50px;
+  --music-modal-embed-animation-duration: 0.8s;
+  --music-modal-embed-medium-height: 232px;
+  --music-modal-embed-large-height: 352px;
+  --music-modal-tablet-top: 2%;
+  --music-modal-title-text-tablet-font-size: 40px;
+  --music-modal-mobile-top: 2%;
+  --music-modal-mobile-padding-top: 40px;
+  --music-modal-title-text-mobile-font-size: 40px;
+  --music-modal-release-date-mobile-font-size: 16px;
+  --music-modal-track-list-padding-top: 20px;
+  --music-modal-track-list-mobile-font-size: 15px;
+
+  /* Modal Properties */
+  --modal-padding: 25px;
+  --modal-border-radius: 30px;
+  --modal-width-desktop: 70%;
+  --modal-width-tablet: 80%;
+  --modal-width-mobile: 80%;
+  --modal-height-desktop: 800px;
+  --modal-height-tablet: 73%;
+  --modal-height-mobile: 73%;
+
+  /* Colors */
+  --primary-text-color: rgba(255, 255, 255, 0.5);
+  --secondary-text-color: rgba(255, 255, 255, 0.8);
+  --background-color: rgba(0, 0, 0, 0.247);
+  --border-color: rgba(255, 255, 255, 0.5);
+  --shadow-color: rgba(255, 255, 255, 0.3);
+  --hover-shadow-color: rgba(255, 255, 255, 0.4);
+
+  /* Font Sizes */
+  --title-font-size-desktop: 80px;
+  --title-font-size-tablet: 40px;
+  --title-font-size-mobile: 60px;
+  --subtitle-font-size-desktop: 50px;
+  --subtitle-font-size-mobile: 32px;
+  --body-font-size-desktop: 20px;
+  --body-font-size-mobile: 15px;
+
+  /* Animation Durations */
+  --fade-in-duration: 0.5s;
+  --hover-transition-duration: 0.3s;
+  --loading-animation-duration: 1s;
+
+  /* Z-Index Values */
+  --modal-z-index: 2;
+  --overlay-z-index: 1;
+  --close-button-z-index: 5;
+  --loading-overlay-z-index: 1000;
+
+  /* Breakpoints */
+  --mobile-breakpoint: 767px;
+  --tablet-breakpoint: 1000px;
+  --desktop-breakpoint: 1200px;
+
+  /* Layout Constraints */
+  --max-content-width: 1200px;
+  --content-width-desktop: 90%;
+  --content-width-mobile: 95%;
+  --artwork-size-desktop: 350px;
+  --artwork-size-mobile: 300px;
+
+  /* Button Dimensions */
+  --button-padding: 12px 24px;
+  --button-border-radius: 25px;
+  --spotify-button-width: 150px;
+  --spotify-button-height: 50px;
+
+  /* Social Media */
+  --social-media-padding: 2px 0;
+  --social-media-gap: 20px;
+
+  /* Spotify Embed */
+  --spotify-embed-height: 152px;
+  --spotify-embed-border-radius: 20px;
+}

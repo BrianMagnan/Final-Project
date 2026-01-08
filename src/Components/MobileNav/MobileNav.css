@@ -14,6 +14,46 @@
   display: none;
 }
 
+.mobile-nav__link-element {
+  color: #ffffff80;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mobile-nav__link-element:hover {
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.mobile-nav__link-element--active {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mobile-nav__social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+.mobile-nav__social-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  color: #ffffff;
+  filter: none;
+}
+
+.mobile-nav__social-link svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 @media screen and (max-width: 625px) {
   .mobile-nav {
     display: flex;
@@ -29,12 +69,26 @@
     opacity: 0;
     visibility: hidden;
     transition: transform 0.4s ease, opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
   }
 
   .mobile-nav.open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-nav:not(.open) {
+    pointer-events: none;
+  }
+
+  /* Ensure mobile nav blocks all content when open */
+  .mobile-nav.open {
+    overflow: hidden;
+    touch-action: none;
+    -webkit-overflow-scrolling: none;
+    overscroll-behavior: none;
   }
 
   .mobile-nav__menu {
@@ -58,18 +112,18 @@
     padding: 0 30px;
   }
 
-  .mobile-nav__link a {
+  .mobile-nav__link-element {
     color: #ffffff80;
     text-decoration: none;
     transition: color 0.3s ease;
   }
 
-  .mobile-nav__link a:hover {
+  .mobile-nav__link-element:hover {
     color: #ffffff;
     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
   }
 
-  .mobile-nav__link a.mobile-nav__link--active {
+  .mobile-nav__link-element--active {
     color: #ffffff;
     text-decoration: none;
     font-weight: 600;
@@ -83,14 +137,17 @@
     margin-top: auto;
   }
 
-  .mobile-nav__social .social-media__link {
-    width: 2rem;
-    height: 2rem;
+  .mobile-nav__social-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
     color: #ffffff;
     filter: none;
   }
 
-  .mobile-nav__social .social-media__link svg {
+  .mobile-nav__social-link svg {
     width: 1.5rem;
     height: 1.5rem;
   }

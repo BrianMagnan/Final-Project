@@ -27,17 +27,17 @@ function ErrorDisplay({ error, onRetry, type }) {
   };
 
   return (
-    <div className="error-display">
-      <div className="error-display__container">
+    <section className="error-display">
+      <article className="error-display__container">
         <h1 className="error-display__title">{getErrorTitle()}</h1>
         <h2 className="error-display__subtitle">{getErrorMessage()}</h2>
 
         <Link to="/" className="error-display__link">
           Go Back Home
         </Link>
-      </div>
+      </article>
       <Footer className="error-display__footer" />
-    </div>
+    </section>
   );
 }
 

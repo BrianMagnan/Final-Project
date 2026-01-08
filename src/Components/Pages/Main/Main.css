@@ -1,12 +1,16 @@
+/* Import CSS variables from constants */
+@import "../../../config/css-variables.css";
+
 .main {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  padding-top: 111px;
+  padding-top: var(--header-height);
   overflow: hidden;
 }
 
@@ -14,21 +18,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
-  max-width: 1200px;
+  width: var(--content-width-desktop);
+  max-width: var(--max-content-width);
   margin: 0 auto;
   position: relative;
 }
 
 .main__title {
-  font-size: clamp(32px, 6vw, 80px);
+  font-size: clamp(32px, 6vw, var(--title-font-size-desktop));
   font-weight: 600;
-  color: #ffffff80;
+  color: var(--primary-text-color);
   text-align: center;
-  margin: 20px 0 0px 0;
+  margin: var(--main-title-margin, 20px) 0 0px 0;
   text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
-
-  animation: fadeInUp 1s ease-out;
+  animation: fadeInUp var(--fade-in-duration) ease-out;
 }
 
 @keyframes fadeInUp {
@@ -43,25 +46,26 @@
 }
 
 .main__most-recent-album-title {
-  font-size: clamp(24px, 4vw, 50px);
+  font-size: clamp(24px, 4vw, var(--subtitle-font-size-desktop));
   font-weight: 600;
-  color: #ffffff80;
+  color: var(--primary-text-color);
   text-align: center;
-  margin: 10px 0 10px 0;
+  margin: var(--main-subtitle-margin, 10px) 0 var(--main-subtitle-margin, 10px)
+    0;
   text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
   opacity: 0.7;
-  animation: fadeInUp 1s ease-out 0.6s both;
+  animation: fadeInUp var(--fade-in-duration) ease-out 0.6s both;
 }
 
 .main__most-recent-album-release-date {
   font-size: clamp(16px, 2.5vw, 24px);
   font-weight: 400;
-  color: #ffffff80;
+  color: var(--primary-text-color);
   text-align: center;
-  margin: 0 0 10px 0;
+  margin: 0 0 var(--main-release-date-margin, 10px) 0;
   text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
   opacity: 0.7;
-  animation: fadeInUp 1s ease-out 0.7s both;
+  animation: fadeInUp var(--fade-in-duration) ease-out 0.7s both;
 }
 
 .main--loading {
@@ -79,7 +83,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
+  z-index: var(--loading-overlay-z-index);
 }
 
 .main__most-recent-album {
@@ -87,53 +91,54 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 60px 0 0 0;
+  margin: var(--main-album-margin, 60px) 0 0 0;
 }
 
-.main__most-recent-album__artwork {
-  width: clamp(200px, 25vw, 350px);
-  height: clamp(200px, 25vw, 350px);
+.main__most-recent-album-artwork {
+  width: clamp(200px, 25vw, var(--artwork-size-desktop));
+  height: clamp(200px, 25vw, var(--artwork-size-desktop));
   object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: var(--main-artwork-border-radius, 12px);
+  box-shadow: 0 8px 32px var(--shadow-color);
+  transition: transform var(--hover-transition-duration) ease,
+    box-shadow var(--hover-transition-duration) ease;
   opacity: 0.7;
-  animation: fadeInUp 1s ease-out 0.6s both;
+  animation: fadeInUp var(--fade-in-duration) ease-out 0.6s both;
 }
 
-.main__most-recent-album__artwork:hover {
+.main__most-recent-album-artwork:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 40px var(--hover-shadow-color);
   opacity: 1;
 }
 
 .main__empty-message {
-  font-size: clamp(16px, 3vw, 20px);
+  font-size: clamp(16px, 3vw, var(--body-font-size-desktop));
   color: #666;
   text-align: center;
   opacity: 0.8;
-  margin: 40px 0;
-  padding: 20px;
+  margin: var(--main-empty-message-margin, 40px) 0;
+  padding: var(--main-empty-message-padding, 20px);
   background-color: rgba(102, 102, 102, 0.1);
-  border-radius: 8px;
+  border-radius: var(--main-empty-message-border-radius, 8px);
   border: 1px solid rgba(102, 102, 102, 0.3);
   text-shadow: 1px 1px 2px rgba(128, 128, 128, 0.6);
-  animation: fadeInUp 1s ease-out 0.5s both;
+  animation: fadeInUp var(--fade-in-duration) ease-out 0.5s both;
 }
 
 .main__listen-button {
   background: linear-gradient(135deg, #8c8c8c75, #4d4d4db5);
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--primary-text-color);
   border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-size: 16px;
+  padding: var(--button-padding);
+  border-radius: var(--button-border-radius);
+  font-size: var(--main-button-font-size, 16px);
   font-weight: 600;
   cursor: pointer;
-  margin: 10px 0 0 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
-  animation: fadeInUp 1s ease-out 0.8s both;
+  margin: var(--main-button-margin, 10px) 0 0 0;
+  transition: all var(--hover-transition-duration) ease;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  animation: fadeInUp var(--fade-in-duration) ease-out 0.8s both;
 }
 
 .main__listen-button:hover {
@@ -149,45 +154,46 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 2px 0;
+  padding: var(--social-media-padding);
   margin-top: auto;
 }
 
 /* Responsive Styles -------------------------------------------------------------*/
 
-@media (max-width: 768px) {
+@media (max-width: var(--mobile-breakpoint)) {
   .main__content {
-    width: 95%;
-    padding: 20px;
+    width: var(--content-width-mobile);
+    padding: var(--main-mobile-padding, 20px);
   }
 
   .main__title {
     font-size: clamp(60px, 12vw, 120px);
-    padding: 20px 0;
+    padding: var(--main-title-mobile-padding, 20px) 0;
   }
 
   .main__most-recent-album-title {
-    font-size: clamp(20px, 5vw, 32px);
-    margin: 15px 0 10px 0;
+    font-size: clamp(20px, 5vw, var(--subtitle-font-size-mobile));
+    margin: var(--main-subtitle-mobile-margin, 15px) 0
+      var(--main-subtitle-mobile-margin, 10px) 0;
   }
 
   .main__most-recent-album-release-date {
     font-size: clamp(14px, 3vw, 20px);
-    margin: 0 0 15px 0;
+    margin: 0 0 var(--main-release-date-mobile-margin, 15px) 0;
   }
 
   .main__most-recent-album {
-    margin: 30px 0;
+    margin: var(--main-album-mobile-margin, 30px) 0;
   }
 
-  .main__most-recent-album__artwork {
-    width: clamp(200px, 50vw, 300px);
-    height: clamp(200px, 50vw, 300px);
+  .main__most-recent-album-artwork {
+    width: clamp(200px, 50vw, var(--artwork-size-mobile));
+    height: clamp(200px, 50vw, var(--artwork-size-mobile));
   }
 
   .main__listen-button {
-    padding: 10px 20px;
-    font-size: 14px;
-    margin-top: 15px;
+    padding: var(--main-button-mobile-padding, 10px 20px);
+    font-size: var(--main-button-mobile-font-size, 14px);
+    margin-top: var(--main-button-mobile-margin-top, 15px);
   }
 }

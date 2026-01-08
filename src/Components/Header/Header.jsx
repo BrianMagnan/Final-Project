@@ -21,10 +21,10 @@ function Header() {
 
   return (
     <header className={`header ${isMenuOpen ? "header--fixed" : ""}`}>
-      <div className="header__left">
+      <div className="header__logo">
         <Logo onClose={handleMenuClose} isOpen={isMenuOpen} />
       </div>
-      <div className="header__right">
+      <div className="header__navigation">
         <Navigation navItems={navItems} />
       </div>
       <MenuToggle

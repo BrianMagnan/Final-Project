@@ -25,59 +25,61 @@ function LoadingState({
     switch (type) {
       case "music":
         return (
-          <div className="loading-state__content">
+          <section className="loading-state__content">
             <section
-              className="music__grid"
+              className="loading-state__grid"
               aria-label="Album collection skeleton"
             >
               {Array.from({ length: skeletonCount }, (_, index) => (
-                <Skeleton key={index} type="album" />
+                <article key={index} className="skeleton__album">
+                  <Skeleton key={index} type="album" />
+                </article>
               ))}
             </section>
-          </div>
+          </section>
         );
       case "main":
         return (
-          <div className="loading-state__content">
-            <div className="loading-state__hero">
+          <section className="loading-state__content">
+            <header className="loading-state__hero">
               <Skeleton type="circle" />
               <Skeleton type="text" />
-            </div>
-            <div className="loading-state__section">
+            </header>
+            <section className="loading-state__section">
               <Skeleton type="rectangle" />
               <Skeleton type="text" />
-            </div>
-          </div>
+            </section>
+          </section>
         );
       default:
         return (
-          <div className="loading-state__content">
+          <section className="loading-state__content">
             <Skeleton type="default" count={3} />
-          </div>
+          </section>
         );
     }
   };
 
   if (showSpinner) {
     return (
-      <div className={`loading-state ${className}`}>
+      <section className={`loading-state ${className}`}>
         <Preloader message={message} />
-      </div>
+      </section>
     );
   }
 
   if (!showSkeleton) {
     return (
-      <div className={`loading-state ${className}`}>
+      <section className={`loading-state ${className}`}>
         <Preloader message={message} />
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className={`loading-state loading-state--skeleton ${className}`}>
+    <section className={`loading-state loading-state--skeleton ${className}`}>
       {renderSkeletonContent()}
-    </div>
+    </section>
   );
 }
 

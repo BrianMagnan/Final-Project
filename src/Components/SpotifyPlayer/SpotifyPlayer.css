@@ -1,4 +1,4 @@
-.SpotifyPlayer {
+.spotify-player {
   width: 100%;
   height: 100px;
   display: flex;
@@ -7,7 +7,95 @@
   /* visibility: hidden; */
 }
 
-.SpotifyPlayer__embed {
+.spotify-player__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.spotify-player__album-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.spotify-player__artwork {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.spotify-player__details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.spotify-player__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.spotify-player__artist {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.spotify-player__iframe {
+  border: none;
+  border-radius: 8px;
+}
+
+.spotify-player__tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.spotify-player__track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.spotify-player__track:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.spotify-player__track--active {
+  background-color: rgba(29, 185, 84, 0.1);
+  color: #1db954;
+}
+
+.spotify-player__track-number {
+  font-size: 12px;
+  color: #999;
+  min-width: 20px;
+}
+
+.spotify-player__track-name {
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+  text-align: left;
+}
+
+.spotify-player__embed {
   min-width: 100%;
   height: 500px;
   border-radius: 20px;
@@ -16,7 +104,7 @@
   padding-bottom: -20px;
 }
 
-.SpotifyPlayer__embed__small {
+.spotify-player__embed--small {
   min-width: 100%;
   height: 152px;
   border-radius: 20px;
@@ -24,7 +112,7 @@
   padding: 0;
 }
 
-.SpotifyPlayer__embed__medium {
+.spotify-player__embed--medium {
   min-width: 100%;
   height: 232px;
   border-radius: 20px;
@@ -32,7 +120,7 @@
   padding: 0;
 }
 
-.SpotifyPlayer__embed__main {
+.spotify-player__embed--main {
   height: 500px;
   width: 1000px;
   max-width: 90%;
@@ -47,7 +135,7 @@
 }
 
 /* @media (max-width: 1024px) {
-  .SpotifyPlayer__embed__main {
+  .spotify-player__embed--main {
     width: 90%;
   }
 } */

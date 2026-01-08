@@ -3,10 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { routes, generateNavItems } from "../../routes/routes";
 import { createPortal } from "react-dom";
 import SocialMedia from "../SocialMedia/SocialMedia";
+import { usePreventScroll } from "../../hooks/useModalClose";
 
 function MobileNav({ isOpen, onClose }) {
   const navItems = generateNavItems(routes);
   const location = useLocation();
+
+  // Prevent body scrolling when mobile nav is open
+  usePreventScroll(isOpen, "menu-open");
 
   return (
     <>
@@ -24,6 +28,7 @@ function MobileNav({ isOpen, onClose }) {
                         href={item.path}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="mobile-nav__link-element"
                       >
                         {item.label}
                       </a>
@@ -31,7 +36,11 @@ function MobileNav({ isOpen, onClose }) {
                       <Link
                         to={item.path}
                         onClick={onClose}
-                        className={isActive ? "mobile-nav__link--active" : ""}
+                        className={
+                          isActive
+                            ? "mobile-nav__link-element--active"
+                            : "mobile-nav__link-element"
+                        }
                       >
                         {item.label}
                       </Link>
@@ -42,7 +51,9 @@ function MobileNav({ isOpen, onClose }) {
             </li>
           </ul>
           <div className="mobile-nav__social">
-            <SocialMedia />
+            <div className="mobile-nav__social-link">
+              <SocialMedia />
+            </div>
           </div>
         </div>,
         document.getElementById("nav-portal")

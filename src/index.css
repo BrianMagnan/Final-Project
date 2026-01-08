@@ -1,5 +1,10 @@
+/* Import local fonts */
+@import url("./assets/fonts/fonts.css");
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -30,6 +35,51 @@ body {
   min-height: 100vh;
   padding: 0;
   overflow-x: hidden;
+}
+
+body--menu-open {
+  overflow: hidden;
+  padding-right: 0 !important;
+}
+
+/* Prevent scrolling on all content when mobile nav is open */
+body--menu-open * {
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Re-enable pointer events for the mobile nav itself */
+body--menu-open .mobile-nav.open {
+  pointer-events: auto !important;
+}
+
+body--modal-open {
+  overflow: hidden;
+  padding-right: 0 !important;
+}
+
+/* Prevent scrolling on all content when music player modal is open */
+body--modal-open * {
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Re-enable pointer events and scrolling for the music player modal itself */
+body--modal-open .music-modal,
+body--modal-open .music-modal__overlay {
+  pointer-events: auto !important;
+  overflow: visible !important;
+}
+
+/* Allow scrolling within the music player modal */
+body--modal-open .music-modal {
+  overflow-y: auto !important;
+  pointer-events: auto !important;
+}
+
+/* Allow scroll events to work within the music player */
+body--modal-open .music-modal * {
+  pointer-events: auto !important;
 }
 
 /* Particle effect container */
@@ -82,14 +132,6 @@ button:hover::after,
   opacity: 0;
 }
 
-body.menu-open {
-  overflow: hidden;
-}
-
-body.modal-open {
-  overflow: hidden;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -127,4 +169,45 @@ button:focus-visible {
   button {
     background-color: #868585;
   }
+}
+
+/* Prevent scrolling on html element when modals are open */
+html.body--menu-open,
+html.body--modal-open {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Prevent layout shifts when scrollbars are hidden */
+body--menu-open,
+body--modal-open {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Font Loading States */
+.fonts-loading {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.fonts-loaded {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+/* Smooth font transition */
+* {
+  transition: font-family 0.3s ease;
+}
+
+/* Prevent layout shift during font loading */
+.fonts-loading * {
+  font-display: swap;
+}
+
+.fonts-loaded * {
+  font-display: auto;
 }

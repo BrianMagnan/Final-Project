@@ -21,7 +21,7 @@
 }
 
 /* Route loader styling */
-.route-loader {
+.app__route-loader {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,7 @@
 }
 
 /* Route error styling */
-.route-error {
+.app__route-error {
   display: flex;
   justify-content: center;
   align-items: center;

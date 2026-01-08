@@ -3,114 +3,92 @@ import "./Main.css";
 import SocialMedia from "../../SocialMedia/SocialMedia";
 import Preloader from "../../Preloader/Preloader";
 import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
-
-import { transformedAlbums } from "../../../utils/albumUtils";
-import { useState, useEffect } from "react";
+import { useMusic } from "../../../contexts/MusicContext";
 
 function Main() {
-  const [albums, setAlbums] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [loadingMessage, setLoadingMessage] = useState("Loading");
-
-  const fetchAlbums = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      setLoadingMessage("Loading...");
-
-      const albumsData = await transformedAlbums();
-      setAlbums(albumsData);
-    } catch (err) {
-      console.error("Error fetching albums:", err);
-      setError(err.message || "Failed to load albums");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchAlbums();
-  }, []);
-
-  const mostRecentAlbum = albums[0];
+  const {
+    albums,
+    isLoading,
+    error,
+    loadingMessage,
+    mostRecentAlbum,
+    hasAlbums,
+    refreshMusicData,
+  } = useMusic();
 
   // Show preloader while loading
   if (isLoading) {
     return (
-      <div className="main main--loading">
-        <div className="main__loading-overlay">
+      <main className="main main--loading">
+        <section className="main__loading-overlay">
           <Preloader message={loadingMessage} />
-        </div>
-      </div>
+        </section>
+      </main>
     );
   }
 
   // Show error message if there's an error
   if (error) {
     return (
-      <div className="main">
-        <div className="main__header"></div>
-        <div className="main__content">
-          <div className="main__title">Vary Suite</div>
-          <div className="main__social-media">
+      <main className="main">
+        <section className="main__content">
+          <h1 className="main__title">Vary Suite</h1>
+          <aside className="main__social-media">
             <SocialMedia />
-          </div>
-          <ErrorDisplay error={error} onRetry={fetchAlbums} type="api" />
-        </div>
-        <Footer className="main__footer" />
-      </div>
+          </aside>
+          <ErrorDisplay error={error} onRetry={refreshMusicData} type="api" />
+        </section>
+        <Footer className="--main" />
+      </main>
     );
   }
 
   // Show "Nothing found" message if no albums are available
-  if (!albums || albums.length === 0) {
+  if (!hasAlbums) {
     return (
-      <div className="main">
-        <div className="main__header"></div>
-        <div className="main__content">
-          <div className="main__title">Vary Suite</div>
-          <div className="main__social-media">
+      <main className="main">
+        <section className="main__content">
+          <h1 className="main__title">Vary Suite</h1>
+          <aside className="main__social-media">
             <SocialMedia />
-          </div>
-          <div className="main__empty-message">Nothing found</div>
-        </div>
-        <Footer className="main__footer" />
-      </div>
+          </aside>
+          <p className="main__empty-message">Nothing found</p>
+        </section>
+        <Footer className="--main" />
+      </main>
     );
   }
 
   // Show album content when data is available
   return (
-    <div className="main">
-      <div className="main__header"></div>
-      <div className="main__content">
-        <div className="main__title">Vary Suite</div>
-        <div className="main__social-media">
+    <main className="main">
+      <section className="main__content">
+        <h1 className="main__title">Vary Suite</h1>
+        <aside className="main__social-media">
           <SocialMedia />
-        </div>
+        </aside>
 
-        <div className="main__most-recent-album">
+        <article className="main__most-recent-album">
           <img
-            className="main__most-recent-album__artwork"
+            className="main__most-recent-album-artwork"
             src={mostRecentAlbum.artwork}
-            alt={mostRecentAlbum.title}
+            alt={`${mostRecentAlbum.title} album artwork`}
             loading="lazy"
           />
-        </div>
-        <div className="main__most-recent-album-title">
+        </article>
+        <h2 className="main__most-recent-album-title">
           {mostRecentAlbum.title}
-        </div>
-        <div className="main__most-recent-album-release-date">Out Now</div>
+        </h2>
+        <p className="main__most-recent-album-release-date">Out Now</p>
         <button
           className="main__listen-button"
           onClick={() => window.open(mostRecentAlbum.spotifyUrl, "_blank")}
         >
           Listen Now
         </button>
-      </div>
-      <Footer className="main__footer" />
-    </div>
+      </section>
+      <Footer className="--main" />
+    </main>
   );
 }
 

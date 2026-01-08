@@ -9,6 +9,7 @@
     "build:analyze": "vite build --mode analyze",
     "build:preview": "vite build && vite preview",
     "analyze": "node scripts/analyze-bundle.js",
+    "download-fonts": "node scripts/download-fonts.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

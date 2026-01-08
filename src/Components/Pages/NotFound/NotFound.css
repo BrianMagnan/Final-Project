@@ -64,6 +64,10 @@
   background: #f44336;
 }
 
+.not-found__footer {
+  margin-top: auto;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .not-found__content {

@@ -9,6 +9,7 @@ A modern, high-performance music website built with React and Vite, featuring a 
 ## ✨ Features
 
 ### 🎵 Music Player
+
 - **Dynamic Album Display:** Browse through music albums with beautiful artwork
 - **Interactive Music Player:** Click any album to open a detailed player modal
 - **Track Listing:** View all tracks for each album with duration and formatting
@@ -16,6 +17,7 @@ A modern, high-performance music website built with React and Vite, featuring a 
 - **Error Handling:** Robust error handling with user-friendly messages
 
 ### 🎨 User Experience
+
 - **Responsive Design:** Perfect on desktop, tablet, and mobile devices
 - **Progressive Loading:** Skeleton screens and loading states for smooth UX
 - **Particle Animations:** Beautiful background animations that adapt to screen size
@@ -23,6 +25,7 @@ A modern, high-performance music website built with React and Vite, featuring a 
 - **Accessibility:** ARIA labels and keyboard navigation support
 
 ### ⚡ Performance Optimizations
+
 - **Code Splitting:** Lazy-loaded components for faster initial load
 - **Bundle Compression:** Gzip and Brotli compression for smaller file sizes
 - **Image Optimization:** Optimized images and lazy loading
@@ -31,6 +34,7 @@ A modern, high-performance music website built with React and Vite, featuring a 
 - **Build Optimization:** Production-ready build with minification
 
 ### 🛡️ Error Handling
+
 - **API Error Recovery:** Automatic retry logic for failed API calls
 - **User-Friendly Messages:** Clear error messages with retry options
 - **Error Boundaries:** React error boundaries for component-level error handling
@@ -74,10 +78,12 @@ src/
 ## 🛠️ Development
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 
 ### Installation
+
 ```bash
 # Clone the repository
 git clone https://github.com/BrianMagnan/Final-Project.git
@@ -93,6 +99,7 @@ npm run dev
 ```
 
 ### Available Scripts
+
 ```bash
 npm run dev          # Start development server
 npm run build        # Build for production
@@ -104,13 +111,16 @@ npm run build:analyze # Analyze bundle size
 ## 🚀 Deployment
 
 ### Vercel Deployment
+
 The site is automatically deployed to Vercel with:
+
 - **Custom Domain:** varysuite.com
 - **SSL/HTTPS:** Enabled
 - **Auto-deployment:** Every push to main branch
 - **Performance Monitoring:** Built-in analytics
 
 ### Build Process
+
 - **Optimization:** Code splitting and lazy loading
 - **Compression:** Gzip and Brotli compression
 - **Minification:** Production-ready JavaScript and CSS
@@ -119,12 +129,14 @@ The site is automatically deployed to Vercel with:
 ## 📊 Performance Metrics
 
 ### Bundle Size
+
 - **Main Bundle:** ~25KB (8KB gzipped)
 - **Music Chunk:** ~172KB (56KB gzipped) - Lazy loaded
 - **CSS:** ~22KB (4KB gzipped)
 - **Total:** ~220KB (70KB gzipped)
 
 ### Core Web Vitals
+
 - **Largest Contentful Paint (LCP):** Optimized
 - **First Input Delay (FID):** Minimal
 - **Cumulative Layout Shift (CLS):** Stable
@@ -132,6 +144,7 @@ The site is automatically deployed to Vercel with:
 ## 🔧 Configuration
 
 ### Environment Variables
+
 ```env
 # Spotify API (configured in Vercel)
 SPOTIFY_CLIENT_ID=your_client_id
@@ -139,6 +152,7 @@ SPOTIFY_CLIENT_SECRET=your_client_secret
 ```
 
 ### Build Configuration
+
 - **Vite Config:** Optimized for production
 - **ESLint:** Code quality rules
 - **Compression:** Automatic gzip/brotli compression
@@ -146,6 +160,7 @@ SPOTIFY_CLIENT_SECRET=your_client_secret
 ## 🎯 Key Optimizations
 
 ### Performance
+
 - ✅ **Code Splitting:** Lazy-loaded music page
 - ✅ **Bundle Compression:** 70% size reduction
 - ✅ **Image Optimization:** Lazy loading and compression
@@ -153,12 +168,14 @@ SPOTIFY_CLIENT_SECRET=your_client_secret
 - ✅ **API Caching:** Smart token management
 
 ### User Experience
+
 - ✅ **Progressive Loading:** Skeleton screens
 - ✅ **Error Recovery:** Graceful error handling
 - ✅ **Responsive Design:** Mobile-first approach
 - ✅ **Accessibility:** ARIA labels and keyboard nav
 
 ### Code Quality
+
 - ✅ **ESLint:** Code quality enforcement
 - ✅ **Error Boundaries:** React error handling
 - ✅ **Type Safety:** PropTypes (removed for performance)

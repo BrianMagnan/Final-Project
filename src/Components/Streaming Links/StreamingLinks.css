@@ -36,21 +36,29 @@
   margin: 0;
   background-color: transparent;
 }
-.streaming__link--apple.music {
+
+.streaming__link--spotify {
   height: 4rem;
   width: 4rem;
   padding: 0;
   background-color: transparent;
 }
 
-.streaming__link--youtube.music {
+.streaming__link--apple-music {
   height: 4rem;
   width: 4rem;
   padding: 0;
   background-color: transparent;
 }
 
-.streaming__link--amazon.music {
+.streaming__link--youtube-music {
+  height: 4rem;
+  width: 4rem;
+  padding: 0;
+  background-color: transparent;
+}
+
+.streaming__link--amazon-music {
   height: 4rem;
   width: 4rem;
   padding: 0;

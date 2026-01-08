@@ -1,16 +1,19 @@
+/* Import CSS variables from constants */
+@import "../../config/css-variables.css";
+
 .footer {
-  padding: 20px 0;
+  padding: var(--footer-padding, 20px) 0;
   position: relative;
   opacity: 1;
   background-color: transparent;
 }
 
-.footer.main__footer {
-  margin-top: 20vh;
+.footer--main {
+  margin-top: var(--footer-main-margin);
 }
 
-.footer.music__footer {
-  margin-top: 0;
+.footer--music {
+  margin-top: var(--footer-music-margin);
   /* background-color: #ff74ea2e; */
 }
 
@@ -18,14 +21,14 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--footer-container-padding, 40px);
   position: relative;
 }
 
 /* RESPONSIVE STYLES------------------------------- */
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: var(--mobile-breakpoint)) {
   .footer__container {
-    padding: 0 16px;
+    padding: 0 var(--footer-container-padding-mobile, 16px);
   }
 }

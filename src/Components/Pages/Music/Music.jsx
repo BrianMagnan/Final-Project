@@ -1,68 +1,50 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
-import {
-  getArtistAlbums,
-  getAlbumTracks,
-  getArtistInfo,
-} from "../../../utils/spotifyApi";
 import "./Music.css";
 import Footer from "../../Footer/Footer";
 import MusicPlayer from "../../MusicPlayer/MusicPlayer";
-import { transformedAlbums } from "../../../utils/albumUtils";
 import useModalClose from "../../../hooks/useModalClose";
 import LoadingState from "../../LoadingState/LoadingState";
 import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
+import { useMusic } from "../../../contexts/MusicContext";
 
 function Music() {
-  const [albums, setAlbums] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    albums,
+    isLoading,
+    error,
+    loadingMessage,
+    hasAlbums,
+    refreshMusicData,
+    fetchAlbumTracks,
+  } = useMusic();
+
   const [selectedAlbum, setSelectedAlbum] = useState(null);
   const [albumTracks, setAlbumTracks] = useState([]);
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState("Loading");
   const [playerError, setPlayerError] = useState(null);
 
   useModalClose(isPlayerOpen, () => setIsPlayerOpen(false));
 
-  const fetchMusicData = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      setLoadingMessage("Loading...");
-
-      await Promise.all([getArtistInfo(), getArtistAlbums()]);
-
-      const albumsData = await transformedAlbums();
-      setAlbums(albumsData);
-    } catch (error) {
-      console.error("Error fetching music data:", error);
-      setError(error.message || "Failed to load music data");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchMusicData();
-  }, []);
-
   // Optimized event handler with useCallback
-  const handleAlbumClick = useCallback(async (album) => {
-    try {
-      setPlayerError(null);
-      setSelectedAlbum(album);
-      setIsPlayerOpen(true);
+  const handleAlbumClick = useCallback(
+    async (album) => {
+      try {
+        setPlayerError(null);
+        setSelectedAlbum(album);
+        setIsPlayerOpen(true);
 
-      // Fetch tracks for this album
-      const tracks = await getAlbumTracks(album.id);
-      setAlbumTracks(tracks);
-    } catch (error) {
-      console.error("Error fetching album tracks:", error);
-      setPlayerError("Failed to load album tracks. Please try again.");
-      setIsPlayerOpen(false);
-    }
-  }, []);
+        // Fetch tracks for this album using centralized API
+        const tracks = await fetchAlbumTracks(album.id);
+        setAlbumTracks(tracks);
+      } catch (error) {
+        console.error("Error fetching album tracks:", error);
+        setPlayerError("Failed to load album tracks. Please try again.");
+        setIsPlayerOpen(false);
+      }
+    },
+    [fetchAlbumTracks]
+  );
 
   // Memoized MusicPlayer props to prevent unnecessary re-renders
   const musicPlayerProps = useMemo(
@@ -96,20 +78,20 @@ function Music() {
   if (error) {
     return (
       <main className="music" role="main" aria-label="Error page">
-        <ErrorDisplay error={error} onRetry={fetchMusicData} type="api" />
-        <Footer className="music__footer" />
+        <ErrorDisplay error={error} onRetry={refreshMusicData} type="api" />
+        <Footer className="--music" />
       </main>
     );
   }
 
   // Show "Nothing found" message if no albums are available
-  if (!albums || albums.length === 0) {
+  if (!hasAlbums) {
     return (
       <main className="music" role="main" aria-label="No music available">
-        <div className="music__empty-message" role="status" aria-live="polite">
+        <p className="music__empty-message" role="status" aria-live="polite">
           Nothing found
-        </div>
-        <Footer className="music__footer" />
+        </p>
+        <Footer className="--music" />
       </main>
     );
   }
@@ -145,7 +127,7 @@ function Music() {
 
       {createPortal(<MusicPlayer {...musicPlayerProps} />, document.body)}
 
-      <Footer className="music__footer" />
+      <Footer className="--music" />
     </main>
   );
 }

@@ -5,44 +5,46 @@ function Skeleton({ type = "default", count = 1, className = "" }) {
     switch (type) {
       case "album":
         return (
-          <article className="music__track">
-            <div className="music__artwork-container">
-              <div className="music__artwork skeleton"></div>
+          <article className="skeleton__album-track">
+            <div className="skeleton__album-artwork-container">
+              <div className="skeleton__album-artwork"></div>
             </div>
           </article>
         );
       case "text":
         return (
-          <div className="skeleton skeleton--text">
+          <section className="skeleton skeleton--text">
             <div className="skeleton__line"></div>
             <div className="skeleton__line skeleton__line--short"></div>
-          </div>
+          </section>
         );
       case "circle":
-        return <div className="skeleton skeleton--circle"></div>;
+        return <section className="skeleton skeleton--circle"></section>;
       case "rectangle":
-        return <div className="skeleton skeleton--rectangle"></div>;
+        return <section className="skeleton skeleton--rectangle"></section>;
       default:
-        return <div className="skeleton skeleton--default"></div>;
+        return <section className="skeleton skeleton--default"></section>;
     }
   };
 
   // For non-album types, use the count prop
   if (type !== "album") {
     return (
-      <div className={`skeleton-container ${className}`}>
+      <section className={`skeleton__container ${className}`}>
         {Array.from({ length: count }, (_, index) => (
-          <div key={index} className="skeleton-item">
+          <article key={index} className="skeleton__item">
             {renderSkeleton()}
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
     );
   }
 
   // For album type, return single item (grid items are handled by parent)
   return (
-    <div className={`skeleton-wrapper ${className}`}>{renderSkeleton()}</div>
+    <section className={`skeleton__wrapper ${className}`}>
+      {renderSkeleton()}
+    </section>
   );
 }
 

@@ -7,6 +7,7 @@ import NotFound from "../Pages/NotFound/NotFound";
 import Particles from "../Particles/Particles";
 import LoadingState from "../LoadingState/LoadingState";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
+import { MusicProvider } from "../../contexts/MusicContext";
 
 import "./App.css";
 
@@ -15,7 +16,7 @@ const Music = lazy(() => import("../Pages/Music/Music"));
 
 // Loading component for lazy-loaded routes
 const RouteLoader = () => (
-  <div className="route-loader">
+  <div className="app__route-loader">
     <LoadingState type="default" message="Loading..." />
   </div>
 );
@@ -38,7 +39,7 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="route-error">
+        <div className="app__route-error">
           <ErrorDisplay
             error={this.state.error}
             onRetry={() => this.setState({ hasError: false, error: null })}
@@ -54,23 +55,25 @@ class ErrorBoundary extends Component {
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="app">
-        <Particles />
-        <Header />
-        <main className="app__content">
-          <ErrorBoundary>
-            <Suspense fallback={<RouteLoader />}>
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/music" element={<Music />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </ErrorBoundary>
-        </main>
-      </div>
-    </BrowserRouter>
+    <MusicProvider>
+      <BrowserRouter>
+        <div className="app">
+          <Particles />
+          <Header />
+          <main className="app__content">
+            <ErrorBoundary>
+              <Suspense fallback={<RouteLoader />}>
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="/music" element={<Music />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+          </main>
+        </div>
+      </BrowserRouter>
+    </MusicProvider>
   );
 }
 

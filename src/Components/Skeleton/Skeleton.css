@@ -6,41 +6,40 @@
   border-radius: 4px;
 }
 
-.skeleton-wrapper {
+.skeleton__wrapper {
   display: inline-block;
 }
 
-.skeleton-container {
+.skeleton__container {
   display: grid;
   gap: 20px;
   width: 100%;
 }
 
-.skeleton-item {
+.skeleton__item {
   display: flex;
   flex-direction: column;
 }
 
-/* Apply skeleton styling to music page classes */
-.music__artwork.skeleton {
+.skeleton__album-track {
+  width: 250px;
+}
+
+.skeleton__album-artwork-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skeleton__album-artwork {
+  width: 250px;
+  height: 250px;
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+  border-radius: 15px;
   opacity: 0.5;
   box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.3);
-  /* Override img-specific styles for skeleton div */
-  object-fit: unset;
-  cursor: unset;
-  transition: unset;
-  transform: unset;
-}
-
-/* Ensure skeleton artwork has proper dimensions */
-.music__artwork.skeleton {
-  width: 250px;
-  height: 250px;
-  border-radius: 15px;
-  display: block;
 }
 
 /* Text skeleton */

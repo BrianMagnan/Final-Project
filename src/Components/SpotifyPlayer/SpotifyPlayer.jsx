@@ -11,9 +11,9 @@ function SpotifyPlayer({ album, tracks }) {
   };
 
   return (
-    <div className="spotify-player">
+    <section className="spotify-player">
       <div className="spotify-player__container">
-        <div className="spotify-player__album-info">
+        <header className="spotify-player__album-info">
           <img
             className="spotify-player__artwork"
             src={album.artwork}
@@ -23,9 +23,9 @@ function SpotifyPlayer({ album, tracks }) {
             <h3 className="spotify-player__title">{album.title}</h3>
             <p className="spotify-player__artist">{album.artist}</p>
           </div>
-        </div>
+        </header>
 
-        <div className="spotify-player__embed">
+        <section className="spotify-player__embed">
           {currentTrack && currentTrack.uri ? (
             <iframe
               className="spotify-player__iframe"
@@ -49,9 +49,13 @@ function SpotifyPlayer({ album, tracks }) {
               title={`Spotify player for ${album.title}`}
             />
           )}
-        </div>
+        </section>
 
-        <div className="spotify-player__tracks">
+        <section
+          className="spotify-player__tracks"
+          role="listbox"
+          aria-label="Track list"
+        >
           {tracks.map((track, index) => (
             <button
               key={track.uri}
@@ -61,14 +65,16 @@ function SpotifyPlayer({ album, tracks }) {
                   : ""
               }`}
               onClick={() => handleTrackClick(index)}
+              role="option"
+              aria-selected={index === currentTrackIndex}
             >
               <span className="spotify-player__track-number">{index + 1}</span>
               <span className="spotify-player__track-name">{track.name}</span>
             </button>
           ))}
-        </div>
+        </section>
       </div>
-    </div>
+    </section>
   );
 }
 

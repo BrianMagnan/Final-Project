@@ -18,11 +18,6 @@
   margin: 0 auto;
 }
 
-.loading-state__header {
-  margin-bottom: 30px;
-  padding: 0 20px;
-}
-
 .loading-state__hero {
   display: flex;
   flex-direction: column;
@@ -38,6 +33,16 @@
   gap: 15px;
   padding: 20px;
   max-width: 600px;
+  margin: 0 auto;
+}
+
+.loading-state__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 120px;
+  padding: 100px 50px;
+  place-items: center;
+  width: 80%;
   margin: 0 auto;
 }
 

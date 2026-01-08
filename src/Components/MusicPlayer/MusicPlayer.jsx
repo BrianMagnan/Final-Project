@@ -61,7 +61,7 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
   if (error) {
     return (
       <div
-        className="musicModal-overlay"
+        className="music-modal__overlay"
         onClick={onClose}
         style={{ "--album-art-url": `url(${album?.artwork})` }}
         role="dialog"
@@ -71,17 +71,17 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
         tabIndex="-1"
       >
         <button
-          className="musicModal__close-btn"
+          className="music-modal__close-btn"
           onClick={onClose}
           aria-label="Close music player"
         >
           X
         </button>
-        <div className="musicModal" onClick={(e) => e.stopPropagation()}>
-          <div className="musicModal__error">
-            <h3 className="musicModal__error-title">Error</h3>
-            <p className="musicModal__error-message">{error}</p>
-            <button className="musicModal__error-retry" onClick={onClose}>
+        <div className="music-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="music-modal__error">
+            <h3 className="music-modal__error-title">Error</h3>
+            <p className="music-modal__error-message">{error}</p>
+            <button className="music-modal__error-retry" onClick={onClose}>
               Close
             </button>
           </div>
@@ -94,7 +94,7 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
   if (isLoading) {
     return (
       <div
-        className="musicModal-overlay"
+        className="music-modal__overlay"
         onClick={onClose}
         style={{ "--album-art-url": `url(${album?.artwork})` }}
         role="dialog"
@@ -104,14 +104,14 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
         tabIndex="-1"
       >
         <button
-          className="musicModal__close-btn"
+          className="music-modal__close-btn"
           onClick={onClose}
           aria-label="Close music player"
         >
           X
         </button>
-        <div className="musicModal" onClick={(e) => e.stopPropagation()}>
-          <div className="musicModal__loading">
+        <div className="music-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="music-modal__loading">
             <Preloader />
           </div>
         </div>
@@ -121,7 +121,7 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
 
   return (
     <div
-      className="musicModal-overlay"
+      className="music-modal__overlay"
       onClick={onClose}
       style={{ "--album-art-url": `url(${album.artwork})` }}
       role="dialog"
@@ -131,22 +131,22 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
       tabIndex="-1"
     >
       <button
-        className="musicModal__close-btn"
+        className="music-modal__close-btn"
         onClick={onClose}
         aria-label="Close music player"
       >
         X
       </button>
-      <div className="musicModal" onClick={(e) => e.stopPropagation()}>
-        {/* Left side of the modal */}
-        <div className="musicModal__left">
+      <div className="music-modal" onClick={(e) => e.stopPropagation()}>
+        {/* Album information section */}
+        <div className="music-modal__album-info">
           <img
-            className="musicModal__artwork"
+            className="music-modal__artwork"
             src={album.artwork}
             alt={`${album.title} album artwork`}
           />
           <button
-            className="musicModal__spotify-btn"
+            className="music-modal__spotify-btn"
             onClick={() => window.open(album.spotifyUrl, "_blank")}
             aria-label={`Open ${album.title} in Spotify`}
           >
@@ -154,18 +154,18 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
           </button>
         </div>
 
-        {/* Right side of the modal */}
-        <div className="musicModal__right">
-          <div className="musicModal__title">
-            <h2 className="musicModal__title-text">{album.title}</h2>
-            <h3 className="musicModal__release-date">
+        {/* Main content section */}
+        <div className="music-modal__content">
+          <div className="music-modal__title">
+            <h2 className="music-modal__title-text">{album.title}</h2>
+            <h3 className="music-modal__release-date">
               {formatReleaseDate(album.fullReleaseDate)}
             </h3>
           </div>
-          <div className="musicModal__embed-container">
+          <div className="music-modal__embed-container">
             {currentTrack && currentTrack.uri ? (
               <iframe
-                className="musicModal__embed"
+                className="music-modal__embed"
                 src={`https://open.spotify.com/embed/track/${
                   currentTrack.uri.split(":")[2]
                 }`}
@@ -174,7 +174,7 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
               />
             ) : (
               <iframe
-                className="musicModal__embed"
+                className="music-modal__embed"
                 src={`https://open.spotify.com/embed/album/${album.id}`}
                 allow="encrypted-media"
                 title={`Spotify player for ${album.title}`}
@@ -182,14 +182,14 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
             )}
           </div>
           <div
-            className="musicModal__track-list"
+            className="music-modal__track-list"
             role="listbox"
             aria-label="Track list"
           >
             {tracks.map((track, index) => (
               <div
                 key={track.id}
-                className={`musicModal__track ${
+                className={`music-modal__track ${
                   index === currentTrackIndex ? "active" : ""
                 }`}
                 onClick={() => handleTrackClick(index)}
@@ -203,10 +203,10 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
                   }
                 }}
               >
-                <span className="musicModal__track-number">{index + 1}</span>
-                <span className="musicModal__track-title">{track.name}</span>
+                <span className="music-modal__track-number">{index + 1}</span>
+                <span className="music-modal__track-title">{track.name}</span>
 
-                <span className="musicModal__track-duration">
+                <span className="music-modal__track-duration">
                   {formatDuration(track.duration_ms)}
                 </span>
               </div>

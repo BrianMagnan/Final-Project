@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy, Component } from "react";
 
+import { MAINTENANCE_MODE } from "../../config/constants";
 import Header from "../Header/Header";
 import Main from "../Pages/Main/Main";
+import Maintenance from "../Pages/Maintenance/Maintenance";
 import NotFound from "../Pages/NotFound/NotFound";
 import Particles from "../Particles/Particles";
 import LoadingState from "../LoadingState/LoadingState";
@@ -54,13 +56,15 @@ class ErrorBoundary extends Component {
 }
 
 function App() {
-  return (
-    <MusicProvider>
-      <BrowserRouter>
-        <div className="app">
-          <Particles />
-          <Header />
-          <main className="app__content">
+  const appContent = (
+    <BrowserRouter>
+      <div className="app">
+        <Particles />
+        <Header />
+        <main className="app__content">
+          {MAINTENANCE_MODE ? (
+            <Maintenance />
+          ) : (
             <ErrorBoundary>
               <Suspense fallback={<RouteLoader />}>
                 <Routes>
@@ -70,11 +74,13 @@ function App() {
                 </Routes>
               </Suspense>
             </ErrorBoundary>
-          </main>
-        </div>
-      </BrowserRouter>
-    </MusicProvider>
+          )}
+        </main>
+      </div>
+    </BrowserRouter>
   );
+
+  return MAINTENANCE_MODE ? appContent : <MusicProvider>{appContent}</MusicProvider>;
 }
 
 export default App;

@@ -1,6 +1,9 @@
 // Application Configuration Constants
 // All hard-coded values are stored here in UPPER_CASE
 
+// Maintenance Mode - set to true to show "under construction" page
+export const MAINTENANCE_MODE = true;
+
 // API Configuration
 export const SPOTIFY_CLIENT_ID = "your-spotify-client-id";
 export const SPOTIFY_CLIENT_SECRET = "your-spotify-client-secret";

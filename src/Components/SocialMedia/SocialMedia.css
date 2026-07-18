@@ -21,17 +21,16 @@
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  color: #ffffff;
+  color: var(--text-faint);
   text-decoration: none;
-  transition: all 0.3s ease;
-  filter: drop-shadow(1px 1px 2px rgba(128, 128, 128, 0.6));
-  opacity: 0.5;
+  transition: color 0.25s ease, transform 0.25s ease;
 }
 
-.social-media__link:hover {
-  transform: translateY(-3px) ease-in-out;
-  opacity: 1;
-  cursor: pointer;
+.social-media__link:hover,
+.social-media__link:focus-visible {
+  color: var(--text-hover);
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .social-media__link svg {
@@ -47,8 +46,9 @@
   transform: translateX(-50%);
   padding: 0.25rem 0.75rem;
   background-color: #1f2937;
-  color: white;
-  font-size: 0.875rem;
+  color: var(--text-bright);
+  font-size: var(--content-subtitle-size);
+  font-weight: var(--ui-meta-weight);
   border-radius: 0.25rem;
   white-space: nowrap;
   opacity: 0;

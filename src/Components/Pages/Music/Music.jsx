@@ -4,103 +4,48 @@ import "./Music.css";
 import Footer from "../../Footer/Footer";
 import MusicPlayer from "../../MusicPlayer/MusicPlayer";
 import useModalClose from "../../../hooks/useModalClose";
-import LoadingState from "../../LoadingState/LoadingState";
-import ErrorDisplay from "../../ErrorDisplay/ErrorDisplay";
-import { useMusic } from "../../../contexts/MusicContext";
+import { FEATURED_ALBUMS } from "../../../config/albums";
 
 function Music() {
-  const {
-    albums,
-    isLoading,
-    error,
-    loadingMessage,
-    hasAlbums,
-    refreshMusicData,
-    fetchAlbumTracks,
-  } = useMusic();
-
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
-  const [albumTracks, setAlbumTracks] = useState([]);
+  const albums = FEATURED_ALBUMS;
+  const [activeIndex, setActiveIndex] = useState(null);
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
-  const [playerError, setPlayerError] = useState(null);
 
-  useModalClose(isPlayerOpen, () => setIsPlayerOpen(false));
+  const closePlayer = useCallback(() => {
+    setIsPlayerOpen(false);
+    setActiveIndex(null);
+  }, []);
 
-  // Optimized event handler with useCallback
-  const handleAlbumClick = useCallback(
-    async (album) => {
-      try {
-        setPlayerError(null);
-        setSelectedAlbum(album);
-        setIsPlayerOpen(true);
+  useModalClose(isPlayerOpen, closePlayer);
 
-        // Fetch tracks for this album using centralized API
-        const tracks = await fetchAlbumTracks(album.id);
-        setAlbumTracks(tracks);
-      } catch (error) {
-        console.error("Error fetching album tracks:", error);
-        setPlayerError("Failed to load album tracks. Please try again.");
-        setIsPlayerOpen(false);
-      }
-    },
-    [fetchAlbumTracks]
-  );
+  const handleAlbumClick = useCallback((index) => {
+    setActiveIndex(index);
+    setIsPlayerOpen(true);
+  }, []);
 
-  // Memoized MusicPlayer props to prevent unnecessary re-renders
+  const selectedAlbum =
+    activeIndex != null && albums[activeIndex] ? albums[activeIndex] : null;
+
   const musicPlayerProps = useMemo(
     () => ({
       album: selectedAlbum,
-      tracks: albumTracks,
+      albums,
+      activeIndex,
+      onChangeIndex: setActiveIndex,
       isOpen: isPlayerOpen,
-      onClose: () => {
-        setIsPlayerOpen(false);
-        setPlayerError(null);
-      },
-      error: playerError,
+      onClose: closePlayer,
     }),
-    [selectedAlbum, albumTracks, isPlayerOpen, playerError]
+    [selectedAlbum, albums, activeIndex, isPlayerOpen, closePlayer]
   );
 
-  // Show loading state while loading
-  if (isLoading) {
-    return (
-      <main
-        className="music music--loading"
-        role="main"
-        aria-label="Loading music content"
-      >
-        <LoadingState type="music" message={loadingMessage} skeletonCount={8} />
-      </main>
-    );
-  }
-
-  // Show error message if there's an error
-  if (error) {
-    return (
-      <main className="music" role="main" aria-label="Error page">
-        <ErrorDisplay error={error} onRetry={refreshMusicData} type="api" />
-        <Footer className="--music" />
-      </main>
-    );
-  }
-
-  // Show "Nothing found" message if no albums are available
-  if (!hasAlbums) {
-    return (
-      <main className="music" role="main" aria-label="No music available">
-        <p className="music__empty-message" role="status" aria-live="polite">
-          Nothing found
-        </p>
-        <Footer className="--music" />
-      </main>
-    );
-  }
-
-  // Show music content when data is available
   return (
     <main className="music" role="main" aria-label="Music discography">
+      <header className="music__header">
+        <h1 className="music__title page-title">Music</h1>
+        <p className="music__subtitle page-subtitle">Albums & singles</p>
+      </header>
       <section className="music__grid" aria-label="Album collection">
-        {albums.map((album) => (
+        {albums.map((album, index) => (
           <article key={album.id} className="music__track">
             <div className="music__artwork-container">
               <img
@@ -108,7 +53,7 @@ function Music() {
                 src={album.artwork}
                 alt={`${album.title} album artwork`}
                 loading="lazy"
-                onClick={() => handleAlbumClick(album)}
+                onClick={() => handleAlbumClick(index)}
                 style={{ cursor: "pointer" }}
                 role="button"
                 tabIndex="0"
@@ -116,7 +61,7 @@ function Music() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    handleAlbumClick(album);
+                    handleAlbumClick(index);
                   }
                 }}
               />

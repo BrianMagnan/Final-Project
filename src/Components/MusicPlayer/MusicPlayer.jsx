@@ -1,53 +1,84 @@
-import { useState, useEffect } from "react";
+import { useEffect, useCallback } from "react";
+import { FaSpotify, FaApple, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./MusicPlayer.css";
 import { usePreventScroll } from "../../hooks/useModalClose";
-import Preloader from "../Preloader/Preloader";
+import { APPLE_MUSIC_ARTIST_URL } from "../../config/albums";
 
-// Helper function to format duration from milliseconds to MM:SS
+const formatReleaseYear = (album) => {
+  if (album?.releaseDate && /^\d{4}$/.test(album.releaseDate)) {
+    return album.releaseDate;
+  }
+
+  if (!album?.fullReleaseDate || album.fullReleaseDate === "unknown") {
+    return null;
+  }
+
+  const date = new Date(album.fullReleaseDate);
+  if (isNaN(date.getTime())) return null;
+  return String(date.getFullYear());
+};
+
+const formatAlbumType = (albumType) => {
+  if (!albumType) return null;
+  const labels = { album: "Album", ep: "EP", single: "Single" };
+  return labels[albumType] || albumType;
+};
+
 const formatDuration = (durationMs) => {
+  if (!durationMs && durationMs !== 0) return null;
   const minutes = Math.floor(durationMs / 60000);
   const seconds = Math.floor((durationMs % 60000) / 1000);
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 };
 
-// Helper function to format release date
-const formatReleaseDate = (dateString) => {
-  if (!dateString || dateString === "unknown") return "Unknown";
+function MusicPlayer({
+  album,
+  albums = [],
+  activeIndex = null,
+  onChangeIndex,
+  isOpen,
+  onClose,
+}) {
+  const canCycle = albums.length > 1 && typeof onChangeIndex === "function";
+  const tracks = album?.tracks?.length ? album.tracks : [];
+  const releaseYear = formatReleaseYear(album);
+  const albumType = formatAlbumType(album?.albumType);
+  const trackCount = tracks.length || album?.totalTracks || 0;
+  const trackLabel =
+    trackCount > 0
+      ? `${trackCount} song${trackCount === 1 ? "" : "s"}`
+      : null;
+  const subtitleParts = [albumType, releaseYear, trackLabel].filter(Boolean);
+  const appleUrl = album?.appleMusicUrl || APPLE_MUSIC_ARTIST_URL;
 
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) return "Unknown";
+  const goPrev = useCallback(() => {
+    if (!canCycle || activeIndex == null) return;
+    onChangeIndex((activeIndex - 1 + albums.length) % albums.length);
+  }, [activeIndex, albums.length, canCycle, onChangeIndex]);
 
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const year = date.getFullYear();
-
-  return `${month.toString().padStart(2, "0")}.${day
-    .toString()
-    .padStart(2, "0")}.${year.toString().slice(-2)}`;
-};
-
-function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const currentTrack = tracks?.[currentTrackIndex];
+  const goNext = useCallback(() => {
+    if (!canCycle || activeIndex == null) return;
+    onChangeIndex((activeIndex + 1) % albums.length);
+  }, [activeIndex, albums.length, canCycle, onChangeIndex]);
 
   usePreventScroll(isOpen, "modal-open");
 
-  // Set loading to false after a short delay to allow content to load
   useEffect(() => {
-    if (isOpen) {
-      setIsLoading(true);
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen]);
+    if (!isOpen || !canCycle) return;
 
-  const handleTrackClick = (index) => {
-    setCurrentTrackIndex(index);
-  };
+    const handleArrowKeys = (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goPrev();
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goNext();
+      }
+    };
+
+    document.addEventListener("keydown", handleArrowKeys);
+    return () => document.removeEventListener("keydown", handleArrowKeys);
+  }, [isOpen, canCycle, goNext, goPrev]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Escape") {
@@ -55,69 +86,7 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
     }
   };
 
-  if (!isOpen) return null;
-
-  // Show error state if there's an error
-  if (error) {
-    return (
-      <div
-        className="music-modal__overlay"
-        onClick={onClose}
-        style={{ "--album-art-url": `url(${album?.artwork})` }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Music player error"
-        onKeyDown={handleKeyDown}
-        tabIndex="-1"
-      >
-        <button
-          className="music-modal__close-btn"
-          onClick={onClose}
-          aria-label="Close music player"
-        >
-          X
-        </button>
-        <div className="music-modal" onClick={(e) => e.stopPropagation()}>
-          <div className="music-modal__error">
-            <h3 className="music-modal__error-title">Error</h3>
-            <p className="music-modal__error-message">{error}</p>
-            <button className="music-modal__error-retry" onClick={onClose}>
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Show loading state
-  if (isLoading) {
-    return (
-      <div
-        className="music-modal__overlay"
-        onClick={onClose}
-        style={{ "--album-art-url": `url(${album?.artwork})` }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Music player loading"
-        onKeyDown={handleKeyDown}
-        tabIndex="-1"
-      >
-        <button
-          className="music-modal__close-btn"
-          onClick={onClose}
-          aria-label="Close music player"
-        >
-          X
-        </button>
-        <div className="music-modal" onClick={(e) => e.stopPropagation()}>
-          <div className="music-modal__loading">
-            <Preloader />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  if (!isOpen || !album) return null;
 
   return (
     <div
@@ -126,94 +95,100 @@ function MusicPlayer({ album, tracks, isOpen, onClose, error }) {
       style={{ "--album-art-url": `url(${album.artwork})` }}
       role="dialog"
       aria-modal="true"
-      aria-label={`Music player for ${album.title}`}
+      aria-label={`Listen to ${album.title}`}
       onKeyDown={handleKeyDown}
       tabIndex="-1"
     >
       <button
-        className="music-modal__close-btn"
+        type="button"
+        className="modal-close"
         onClick={onClose}
         aria-label="Close music player"
       >
         X
       </button>
+      {canCycle && (
+        <button
+          type="button"
+          className="music-modal__nav music-modal__nav--prev"
+          onClick={(e) => {
+            e.stopPropagation();
+            goPrev();
+          }}
+          aria-label="Previous album"
+        >
+          <FaChevronLeft aria-hidden="true" />
+        </button>
+      )}
       <div className="music-modal" onClick={(e) => e.stopPropagation()}>
-        {/* Album information section */}
-        <div className="music-modal__album-info">
+        <header className="music-modal__header">
           <img
             className="music-modal__artwork"
             src={album.artwork}
             alt={`${album.title} album artwork`}
           />
-          <button
-            className="music-modal__spotify-btn"
-            onClick={() => window.open(album.spotifyUrl, "_blank")}
-            aria-label={`Open ${album.title} in Spotify`}
-          >
-            Open in Spotify
-          </button>
-        </div>
-
-        {/* Main content section */}
-        <div className="music-modal__content">
-          <div className="music-modal__title">
-            <h2 className="music-modal__title-text">{album.title}</h2>
-            <h3 className="music-modal__release-date">
-              {formatReleaseDate(album.fullReleaseDate)}
-            </h3>
-          </div>
-          <div className="music-modal__embed-container">
-            {currentTrack && currentTrack.uri ? (
-              <iframe
-                className="music-modal__embed"
-                src={`https://open.spotify.com/embed/track/${
-                  currentTrack.uri.split(":")[2]
-                }`}
-                allow="encrypted-media"
-                title={`Spotify player for ${currentTrack.name}`}
-              />
-            ) : (
-              <iframe
-                className="music-modal__embed"
-                src={`https://open.spotify.com/embed/album/${album.id}`}
-                allow="encrypted-media"
-                title={`Spotify player for ${album.title}`}
-              />
-            )}
-          </div>
-          <div
-            className="music-modal__track-list"
-            role="listbox"
-            aria-label="Track list"
-          >
-            {tracks.map((track, index) => (
-              <div
-                key={track.id}
-                className={`music-modal__track ${
-                  index === currentTrackIndex ? "active" : ""
-                }`}
-                onClick={() => handleTrackClick(index)}
-                role="option"
-                aria-selected={index === currentTrackIndex}
-                tabIndex="0"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    handleTrackClick(index);
-                  }
-                }}
+          <div className="music-modal__header-info">
+            <div className="music-modal__title">
+              <h2 className="music-modal__title-text">{album.title}</h2>
+              {subtitleParts.length > 0 && (
+                <p className="music-modal__subtitle">
+                  {subtitleParts.join(" · ")}
+                </p>
+              )}
+            </div>
+            <div className="music-modal__listen" aria-label="Listen options">
+              <a
+                className="music-modal__listen-link music-modal__listen-link--spotify"
+                href={album.spotifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <span className="music-modal__track-number">{index + 1}</span>
-                <span className="music-modal__track-title">{track.name}</span>
-
-                <span className="music-modal__track-duration">
-                  {formatDuration(track.duration_ms)}
-                </span>
-              </div>
-            ))}
+                <FaSpotify aria-hidden="true" />
+                <span>Spotify</span>
+              </a>
+              <a
+                className="music-modal__listen-link music-modal__listen-link--apple"
+                href={appleUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaApple aria-hidden="true" />
+                <span>Apple Music</span>
+              </a>
+            </div>
           </div>
-        </div>
+        </header>
+
+        {tracks.length > 0 && (
+          <ol className="music-modal__tracklist" aria-label="Track list">
+            {tracks.map((track, index) => {
+              const duration = formatDuration(track.durationMs);
+              return (
+                <li key={`${track.name}-${index}`} className="music-modal__track">
+                  <span className="music-modal__track-number">{index + 1}</span>
+                  <span className="music-modal__track-name">{track.name}</span>
+                  {duration && (
+                    <span className="music-modal__track-duration">{duration}</span>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        )}
       </div>
+      {canCycle && (
+        <button
+          type="button"
+          className="music-modal__nav music-modal__nav--next"
+          onClick={(e) => {
+            e.stopPropagation();
+            goNext();
+          }}
+          aria-label="Next album"
+        >
+          <FaChevronRight aria-hidden="true" />
+        </button>
+      )}
     </div>
   );
 }

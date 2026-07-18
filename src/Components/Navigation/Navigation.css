@@ -1,23 +1,33 @@
+.nav {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
 .nav__list {
   display: flex;
   list-style: none;
+  margin: 0;
   padding: 0;
   gap: 20px;
   text-decoration: none;
 }
 
 .nav__link {
-  color: #ffffff80;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
-.nav__link:hover {
-  color: #ffffff;
+.nav__link:hover,
+.nav__link:focus-visible {
+  color: var(--text-hover);
 }
 
 .nav__link--active {
-  color: #ffffff;
+  color: var(--text-hover);
   text-decoration: none;
-  font-weight: 600;
 }

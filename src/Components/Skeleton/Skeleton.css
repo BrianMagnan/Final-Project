@@ -1,13 +1,8 @@
-/* Skeleton base styles */
 .skeleton {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
-}
-
-.skeleton__wrapper {
-  display: inline-block;
 }
 
 .skeleton__container {
@@ -21,79 +16,11 @@
   flex-direction: column;
 }
 
-.skeleton__album-track {
-  width: 250px;
-}
-
-.skeleton__album-artwork-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.skeleton__album-artwork {
-  width: 250px;
-  height: 250px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 15px;
-  opacity: 0.5;
-  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.3);
-}
-
-/* Text skeleton */
-.skeleton--text {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.skeleton__line {
-  height: 16px;
-  width: 100%;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
-}
-
-.skeleton__line--short {
-  width: 70%;
-}
-
-/* Circle skeleton */
-.skeleton--circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-/* Rectangle skeleton */
-.skeleton--rectangle {
-  width: 100%;
-  height: 20px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
-}
-
-/* Default skeleton */
 .skeleton--default {
   width: 100%;
   height: 20px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
 }
 
-/* Shimmer animation */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;

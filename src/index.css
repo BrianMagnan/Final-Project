@@ -1,14 +1,13 @@
 /* Import local fonts */
 @import url("./assets/fonts/fonts.css");
+@import url("./config/css-variables.css");
 
 :root {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
-  color: #ffffff80;
+  color-scheme: dark;
+  color: var(--text-muted);
   background-color: #000000;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,15 +17,13 @@
 }
 
 a {
-  color: #ffffff80;
+  color: var(--text-muted);
   text-decoration: none;
-  filter: contrast(1.2);
+  transition: color 0.25s ease;
 }
-a:hover {
-  opacity: 1;
-  color: #ffffff;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-  transition: color 0.3s ease;
+a:hover,
+a:focus-visible {
+  color: var(--text-hover);
 }
 
 body {
@@ -37,48 +34,65 @@ body {
   overflow-x: hidden;
 }
 
-body--menu-open {
+body.body--menu-open {
   overflow: hidden;
   padding-right: 0 !important;
 }
 
 /* Prevent scrolling on all content when mobile nav is open */
-body--menu-open * {
+body.body--menu-open * {
   overflow: hidden !important;
   pointer-events: none !important;
 }
 
-/* Re-enable pointer events for the mobile nav itself */
-body--menu-open .mobile-nav.open {
+/* Keep the overlay, header controls, and menu interactive */
+body.body--menu-open .mobile-nav.open,
+body.body--menu-open .mobile-nav.open *,
+body.body--menu-open .header,
+body.body--menu-open .header *,
+body.body--menu-open .menu-toggle,
+body.body--menu-open .menu-toggle * {
   pointer-events: auto !important;
 }
 
-body--modal-open {
-  overflow: hidden;
+body.body--modal-open {
+  overflow: hidden !important;
   padding-right: 0 !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Prevent scrolling on all content when music player modal is open */
-body--modal-open * {
+body.body--modal-open::-webkit-scrollbar {
+  display: none;
+}
+
+/* Lock page content behind the modal, but do not clip modal internals */
+body.body--modal-open .app,
+body.body--modal-open .app__content,
+body.body--modal-open main {
   overflow: hidden !important;
   pointer-events: none !important;
 }
 
-/* Re-enable pointer events and scrolling for the music player modal itself */
-body--modal-open .music-modal,
-body--modal-open .music-modal__overlay {
-  pointer-events: auto !important;
-  overflow: visible !important;
-}
-
-/* Allow scrolling within the music player modal */
-body--modal-open .music-modal {
-  overflow-y: auto !important;
+body.body--modal-open .music-modal__overlay,
+body.body--modal-open .music-modal__overlay * {
   pointer-events: auto !important;
 }
 
-/* Allow scroll events to work within the music player */
-body--modal-open .music-modal * {
+body.body--modal-open .music-modal__overlay {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+body.body--modal-open .music-modal {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  pointer-events: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body.body--modal-open .music-modal * {
   pointer-events: auto !important;
 }
 
@@ -133,8 +147,69 @@ button:hover::after,
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 1.15;
+}
+
+/* Shared typography */
+.page-title {
+  font-family: var(--font-sans);
+  font-size: var(--page-title-size);
+  font-weight: var(--page-title-weight);
+  letter-spacing: var(--page-title-tracking);
+  color: var(--page-title-color);
+  text-align: center;
+  margin: 0;
+  line-height: var(--page-title-line-height);
+}
+
+.page-subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--page-subtitle-size);
+  font-weight: var(--page-subtitle-weight);
+  color: var(--page-subtitle-color);
+  text-align: center;
+  margin: 0.4rem 0 0;
+  line-height: var(--page-subtitle-line-height);
+}
+
+.section-title {
+  font-family: var(--font-sans);
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  letter-spacing: var(--section-title-tracking);
+  color: var(--section-title-color);
+  text-align: center;
+  margin: 0;
+  line-height: var(--section-title-line-height);
+}
+
+.content-title {
+  font-family: var(--font-sans);
+  font-size: var(--content-title-size);
+  font-weight: var(--content-title-weight);
+  color: var(--content-title-color);
+  text-align: center;
+  margin: 0;
+  line-height: var(--content-title-line-height);
+}
+
+.content-subtitle {
+  font-family: var(--font-sans);
+  font-size: var(--content-subtitle-size);
+  font-weight: var(--content-subtitle-weight);
+  color: var(--content-subtitle-color);
+  text-align: center;
+  margin: 0.25rem 0 0;
+  line-height: var(--content-subtitle-line-height);
+}
+
+.card-title {
+  font-family: var(--font-sans);
+  font-size: var(--card-title-size);
+  font-weight: var(--card-title-weight);
+  color: var(--card-title-color);
+  line-height: var(--card-title-line-height);
+  margin: 0;
 }
 
 button {
@@ -164,25 +239,39 @@ button:focus-visible {
     padding: 0;
   }
   a:hover {
-    color: #ffffff;
+    color: var(--text-hover);
   }
   button {
     background-color: #868585;
   }
 }
 
-/* Prevent scrolling on html element when modals are open */
+/* Prevent scrolling on html when modals/menus are open */
+html:has(body.body--menu-open),
+html:has(body.body--modal-open),
 html.body--menu-open,
 html.body--modal-open {
-  overflow: hidden;
+  overflow: hidden !important;
   height: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html:has(body.body--menu-open)::-webkit-scrollbar,
+html:has(body.body--modal-open)::-webkit-scrollbar,
+html.body--menu-open::-webkit-scrollbar,
+html.body--modal-open::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* Prevent layout shifts when scrollbars are hidden */
-body--menu-open,
-body--modal-open {
-  width: 100vw;
-  height: 100vh;
+body.body--menu-open,
+body.body--modal-open {
+  width: 100%;
+  height: 100%;
+  overscroll-behavior: none;
 }
 
 /* Font Loading States */
@@ -193,9 +282,7 @@ body--modal-open {
 }
 
 .fonts-loaded {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Smooth font transition */
@@ -210,4 +297,123 @@ body--modal-open {
 
 .fonts-loaded * {
   font-display: auto;
+}
+
+/* Shared hub CTA (home “More Music”, videos YouTube, etc.) */
+.hub-link {
+  --hub-delay: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.95rem 1.15rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: linear-gradient(
+    135deg,
+    rgba(140, 140, 140, 0.28),
+    rgba(77, 77, 77, 0.45)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+  box-sizing: border-box;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  animation: hubFadeIn 0.5s ease-out var(--hub-delay) both;
+}
+
+.hub-link:hover,
+.hub-link:focus-visible {
+  transform: translateY(-2px) scale(1.01);
+  background: linear-gradient(
+    135deg,
+    rgba(140, 140, 140, 0.55),
+    rgba(77, 77, 77, 0.75)
+  );
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 28px rgba(255, 255, 255, 0.12);
+  color: var(--text-hover);
+  outline: none;
+}
+
+.hub-link:active {
+  transform: translateY(0) scale(0.995);
+}
+
+.hub-link__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.35rem;
+  opacity: 0.9;
+}
+
+.hub-link__label {
+  font-size: var(--ui-label-size);
+  font-weight: var(--ui-label-weight);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+@keyframes hubFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 767px) {
+  .hub-link {
+    padding: 0.85rem 1rem;
+  }
+
+  .hub-link:hover,
+  .hub-link:focus-visible {
+    transform: translateY(-1px);
+  }
+}
+
+/* Shared modal dismiss control (music + video) */
+.modal-close {
+  display: flex;
+  justify-content: end;
+  position: fixed;
+  right: 20px;
+  top: 10px;
+  z-index: 5;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: 1px solid rgb(65, 65, 65);
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.247);
+  backdrop-filter: blur(30px);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.modal-close:hover,
+.modal-close:focus-visible {
+  color: var(--text-hover);
+  border-color: rgba(255, 255, 255, 0.35);
+  outline: none;
+}
+
+@media (max-width: 767px) {
+  .modal-close {
+    top: max(8px, env(safe-area-inset-top));
+    right: 12px;
+    margin-top: 0;
+  }
 }

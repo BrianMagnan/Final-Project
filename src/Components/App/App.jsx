@@ -9,17 +9,17 @@ import NotFound from "../Pages/NotFound/NotFound";
 import Particles from "../Particles/Particles";
 import LoadingState from "../LoadingState/LoadingState";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
-import { MusicProvider } from "../../contexts/MusicContext";
 
 import "./App.css";
 
-// Lazy load the Music page since it's not immediately needed
+// Lazy load pages that aren't needed on first paint
 const Music = lazy(() => import("../Pages/Music/Music"));
+const Videos = lazy(() => import("../Pages/Videos/Videos"));
 
 // Loading component for lazy-loaded routes
 const RouteLoader = () => (
   <div className="app__route-loader">
-    <LoadingState type="default" message="Loading..." />
+    <LoadingState message="Loading..." />
   </div>
 );
 
@@ -42,11 +42,7 @@ class ErrorBoundary extends Component {
     if (this.state.hasError) {
       return (
         <div className="app__route-error">
-          <ErrorDisplay
-            error={this.state.error}
-            onRetry={() => this.setState({ hasError: false, error: null })}
-            type="component"
-          />
+          <ErrorDisplay error={this.state.error} />
         </div>
       );
     }
@@ -56,7 +52,7 @@ class ErrorBoundary extends Component {
 }
 
 function App() {
-  const appContent = (
+  return (
     <BrowserRouter>
       <div className="app">
         <Particles />
@@ -70,6 +66,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Main />} />
                   <Route path="/music" element={<Music />} />
+                  <Route path="/videos" element={<Videos />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
@@ -79,8 +76,6 @@ function App() {
       </div>
     </BrowserRouter>
   );
-
-  return MAINTENANCE_MODE ? appContent : <MusicProvider>{appContent}</MusicProvider>;
 }
 
 export default App;

@@ -20,3 +20,10 @@
     transform: rotateY(360deg);
   }
 }
+
+@media screen and (max-width: 625px) {
+  .logo {
+    width: 40px;
+    height: 40px;
+  } 
+}

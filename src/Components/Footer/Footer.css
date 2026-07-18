@@ -23,11 +23,15 @@
   margin: 0 auto;
   padding: 0 var(--footer-container-padding, 40px);
   position: relative;
+  font-size: var(--content-subtitle-size);
+  font-weight: var(--content-subtitle-weight);
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
 }
 
 /* RESPONSIVE STYLES------------------------------- */
 
-@media screen and (max-width: var(--mobile-breakpoint)) {
+@media screen and (max-width: 767px) {
   .footer__container {
     padding: 0 var(--footer-container-padding-mobile, 16px);
   }

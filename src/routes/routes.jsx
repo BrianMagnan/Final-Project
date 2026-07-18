@@ -1,27 +1,16 @@
-import Main from "../Components/Pages/Main/Main";
-import Music from "../Components/Pages/Music/Music";
-
 export const routes = [
   {
     path: "/",
-    element: Main,
     label: "Home",
   },
   {
     path: "/music",
-    element: Music,
     label: "Music",
   },
   {
-    path: "https://www.youtube.com/@VarySuite",
+    path: "/videos",
     label: "Videos",
-    isExternal: true,
   },
-  // {
-  //   path: "/contact",
-  //   element: Contact,
-  //   label: "Contact",
-  // },
 ];
 
 export const generateNavItems = (routesArray = routes) => {

@@ -3,7 +3,7 @@
   align-items: center;
   width: 90%;
   height: 111px;
-  margin: 5px auto 10px;
+  margin: 5px auto 0;
   font-size: 1.5rem;
   border-bottom: 1px solid rgb(255, 255, 255, 0.5);
   position: absolute;
@@ -31,10 +31,11 @@
 }
 .header__navigation {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  align-self: stretch;
   justify-content: space-between;
   margin: 0 0 0 auto;
-  padding: 0;
+  padding: 0 0 0.65rem;
 }
 
 .header__title {
@@ -53,8 +54,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
-
+    z-index: 1001;
     padding: 0 20px 0 20px;
   }
 

@@ -18,7 +18,7 @@ function NavBar({ navItems }) {
               ) : (
                 <Link
                   to={item.path}
-                  className={isActive ? "nav__link--active" : "nav__link"}
+                  className={`nav__link${isActive ? " nav__link--active" : ""}`}
                 >
                   {item.label}
                 </Link>

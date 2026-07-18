@@ -21,28 +21,23 @@
 
 .maintenance__icon {
   font-size: 48px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-faint);
   margin-bottom: 24px;
   animation: pulse 2s ease-in-out infinite;
 }
 
 .maintenance__title {
-  font-size: clamp(40px, 8vw, 64px);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
   margin: 0 0 8px 0;
 }
 
 .maintenance__subtitle {
-  font-size: clamp(20px, 4vw, 28px);
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
   margin: 0 0 24px 0;
 }
 
 .maintenance__message {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--body-text-size);
+  font-weight: var(--body-text-weight);
+  color: var(--text-muted);
   margin: 0 0 40px 0;
   line-height: 1.6;
 }

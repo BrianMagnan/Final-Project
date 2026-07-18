@@ -8,8 +8,8 @@ function Maintenance() {
         <div className="maintenance__icon" aria-hidden="true">
           ✦
         </div>
-        <h1 className="maintenance__title">Vary Suite</h1>
-        <h2 className="maintenance__subtitle">Under Construction</h2>
+        <h1 className="maintenance__title page-title">Vary Suite</h1>
+        <h2 className="maintenance__subtitle page-subtitle">Under Construction</h2>
         <p className="maintenance__message">
           We&apos;re making some improvements. Check back soon.
         </p>

@@ -4,8 +4,8 @@
   justify-content: center;
   align-items: center;
   right: 10px;
-  color: #ffffff80;
-  opacity: 0.5;
+  color: var(--text-muted);
+  z-index: 1002;
 }
 
 .menu-toggle__button {

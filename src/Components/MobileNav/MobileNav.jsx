@@ -36,11 +36,9 @@ function MobileNav({ isOpen, onClose }) {
                       <Link
                         to={item.path}
                         onClick={onClose}
-                        className={
-                          isActive
-                            ? "mobile-nav__link-element--active"
-                            : "mobile-nav__link-element"
-                        }
+                        className={`mobile-nav__link-element${
+                          isActive ? " mobile-nav__link-element--active" : ""
+                        }`}
                       >
                         {item.label}
                       </Link>
